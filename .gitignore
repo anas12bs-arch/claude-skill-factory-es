@@ -1,0 +1,52 @@
+# ── macOS / Windows system junk ──────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── Environment & secrets ────────────────────────────────
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+secrets.json
+credentials.json
+
+# ── Claude Code local state ──────────────────────────────
+.claude/settings.local.json
+.claude/.DS_Store
+
+# ── Node ─────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+
+# ── Python ───────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# ── Build / temp / editors ───────────────────────────────
+dist/
+build/
+out/
+tmp/
+temp/
+*.tmp
+*.log
+*.swp
+*~
+.vscode/
+.idea/
