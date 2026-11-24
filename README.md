@@ -116,7 +116,7 @@ Two complete, fictional deliverables are included so reviewers can inspect outpu
 
 A 58/100 audit across twelve areas, seven documented inconsistencies with concrete fixes, a customer-journey map showing where patients are lost, copy rewrites, a prioritised action plan and five quick wins.
 
-- [Open the HTML report](./examples/auditoria-negocio-clinica-sonrisa-norte.html)
+- [Open the HTML report](./examples/auditoria-negocio-clinica-sonrisa-norte.html) · [live version](https://anas12bs-arch.github.io/claude-skill-factory-es/examples/auditoria-negocio-clinica-sonrisa-norte.html)
 - [Open the PDF export](./examples/auditoria-negocio-clinica-sonrisa-norte.pdf)
 
 ### Landing page — `kit-web-scrolling`
@@ -125,7 +125,7 @@ A 58/100 audit across twelve areas, seven documented inconsistencies with concre
 
 A single-file landing page in a light clinical palette: sticky blurred navigation, scroll reveals with staggered timing, animated counters, parallax blobs, service cards with real price formatting and a contact form.
 
-- [Open the landing page](./examples/web-clinica-sonrisa-norte.html)
+- [Open the landing page](./examples/web-clinica-sonrisa-norte.html) · [live version](https://anas12bs-arch.github.io/claude-skill-factory-es/examples/web-clinica-sonrisa-norte.html)
 
 Both files are self-contained. No server, no dependencies, no build.
 
