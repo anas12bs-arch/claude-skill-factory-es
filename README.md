@@ -30,18 +30,18 @@ This repository addresses the first layer of that problem: ten opinionated, prod
 
 Each kit is a self-contained Claude Code project: open its folder, describe your business, and the skill produces a file you can hand to a client.
 
-| # | Kit | Folder | Category | Real deliverable | Example prompt |
-|---|-----|--------|----------|------------------|----------------|
-| 01 | **Premium Web Scrolling** | [`kits/kit-web-scrolling`](./kits/kit-web-scrolling) | Web & design | A single self-contained HTML landing page with scroll reveals, parallax, animated counters and a mobile-first layout | `Hazme una web para mi clínica dental` |
-| 02 | **Instagram to Web** | [`kits/kit-instagram-web`](./kits/kit-instagram-web) | Personal brand | A one-page personal brand site generated from an Instagram profile: bio, services, gallery and contact | `Convierte mi Instagram en una web` |
-| 03 | **SEO Audit** | [`kits/kit-auditoria-seo`](./kits/kit-auditoria-seo) | SEO | An HTML dashboard scoring eight SEO categories 0–100, with prioritised, copy-pasteable fixes | `Audita el SEO de https://example.com` |
-| 04 | **Invoicing Dashboard** | [`kits/kit-dashboard-facturas`](./kits/kit-dashboard-facturas) | Finance | An interactive HTML dashboard built from your invoice PDFs: income, expenses, VAT, cash-flow and per-client metrics | `Analiza mis facturas de este trimestre` |
-| 05 | **n8n Automations** | [`kits/kit-automatizaciones-n8n`](./kits/kit-automatizaciones-n8n) | Automation | Ready-to-import n8n workflow JSON, built and validated against a live n8n instance over MCP | `Automatiza los leads de mi web hacia Notion` |
-| 06 | **Prospecting with Firecrawl** | [`kits/kit-prospeccion`](./kits/kit-prospeccion) | Sales | A qualified lead list with each business's digital footprint, weaknesses and contact data | `Busca clínicas dentales en Valencia que necesiten una web` |
-| 07 | **Digital Business Audit** | [`kits/kit-auditoria-negocio`](./kits/kit-auditoria-negocio) | Strategy | A full business audit report: global score, inconsistencies, customer journey, ads, copy and a prioritised action plan | `Audita mi negocio digital` |
-| 08 | **Meta Ads Audit** | [`kits/kit-auditoria-meta-ads`](./kits/kit-auditoria-meta-ads) | Advertising | An ad-account audit: creative review, offer/landing consistency, funnel diagnosis and a testing plan | `¿Por qué no convierten mis Instagram Ads?` |
-| 09 | **Chrome Extension Builder** | [`kits/kit-extension-chrome`](./kits/kit-extension-chrome) | Tooling | A complete Manifest V3 extension bundle (popup, background worker, content scripts) ready to load unpacked | `Crea una extensión que bloquee YouTube de 9 a 17h` |
-| 10 | **Skill Creator** | [`kits/kit-skill-creator`](./kits/kit-skill-creator) | Meta | A new, installable Claude Code skill with valid frontmatter, trigger phrases and a procedural workflow | `Crea una skill que genere presupuestos desde un CSV` |
+| # | Kit · folder | Category | Real deliverable | Example prompt |
+|---|--------------|----------|------------------|----------------|
+| 01 | **Premium Web Scrolling**<br>[`kit-web-scrolling`](./kits/kit-web-scrolling) | Web & design | A single self-contained HTML landing page with scroll reveals, parallax, animated counters and a mobile-first layout | `Hazme una web para mi clínica dental` |
+| 02 | **Instagram to Web**<br>[`kit-instagram-web`](./kits/kit-instagram-web) | Personal brand | A one-page personal brand site generated from an Instagram profile: bio, services, gallery and contact | `Convierte mi Instagram en una web` |
+| 03 | **SEO Audit**<br>[`kit-auditoria-seo`](./kits/kit-auditoria-seo) | SEO | An HTML dashboard scoring eight SEO categories 0–100, with prioritised, copy-pasteable fixes | `Audita el SEO de https://example.com` |
+| 04 | **Invoicing Dashboard**<br>[`kit-dashboard-facturas`](./kits/kit-dashboard-facturas) | Finance | An interactive HTML dashboard built from your invoice PDFs: income, expenses, VAT, cash-flow and per-client metrics | `Analiza mis facturas de este trimestre` |
+| 05 | **n8n Automations**<br>[`kit-automatizaciones-n8n`](./kits/kit-automatizaciones-n8n) | Automation | Ready-to-import n8n workflow JSON, built and validated against a live n8n instance over MCP | `Automatiza los leads de mi web hacia Notion` |
+| 06 | **Prospecting with Firecrawl**<br>[`kit-prospeccion`](./kits/kit-prospeccion) | Sales | A qualified lead list with each business's digital footprint, weaknesses and contact data | `Busca clínicas dentales en Valencia que necesiten una web` |
+| 07 | **Digital Business Audit**<br>[`kit-auditoria-negocio`](./kits/kit-auditoria-negocio) | Strategy | A full business audit report: global score, inconsistencies, customer journey, ads, copy and a prioritised action plan | `Audita mi negocio digital` |
+| 08 | **Meta Ads Audit**<br>[`kit-auditoria-meta-ads`](./kits/kit-auditoria-meta-ads) | Advertising | An ad-account audit: creative review, offer/landing consistency, funnel diagnosis and a testing plan | `¿Por qué no convierten mis Instagram Ads?` |
+| 09 | **Chrome Extension Builder**<br>[`kit-extension-chrome`](./kits/kit-extension-chrome) | Tooling | A complete Manifest V3 extension bundle (popup, background worker, content scripts) ready to load unpacked | `Crea una extensión que bloquee YouTube de 9 a 17h` |
+| 10 | **Skill Creator**<br>[`kit-skill-creator`](./kits/kit-skill-creator) | Meta | A new, installable Claude Code skill with valid frontmatter, trigger phrases and a procedural workflow | `Crea una skill que genere presupuestos desde un CSV` |
 
 Every kit ships in Spanish: `CLAUDE.md`, `INSTRUCCIONES.md` and the skill file itself. That is deliberate and is the project's main differentiator.
 
