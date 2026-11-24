@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría de Negocio Digital · Clínica Dental Sonrisa Norte</title>
+<style>
+  :root{
+    --bg:#f4f6f8; --surface:#ffffff; --ink:#101828; --muted:#5b6675;
+    --line:#e3e8ee; --teal:#0f766e; --teal-soft:#e6f4f1;
+    --amber:#b45309; --amber-soft:#fef3c7; --red:#b42318; --red-soft:#fee4e2;
+    --green:#067647; --green-soft:#dcfae6; --radius:14px;
+    --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px -12px rgba(16,24,40,.18);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:88px}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{line-height:1.2;margin:0 0 .5em;letter-spacing:-.02em}
+  p{margin:0 0 1em}
+  a{color:var(--teal)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ── Nav ───────────────────────────────────────────── */
+  .topbar{
+    position:sticky;top:0;z-index:50;background:rgba(244,246,248,.86);
+    backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex;align-items:center;gap:18px;height:64px;overflow-x:auto}
+  .brand{font-weight:700;font-size:.95rem;white-space:nowrap;letter-spacing:-.01em}
+  .brand span{color:var(--teal)}
+  .topbar nav{display:flex;gap:6px;margin-left:auto}
+  .topbar nav a{
+    font-size:.82rem;text-decoration:none;color:var(--muted);padding:7px 10px;
+    border-radius:8px;white-space:nowrap;
+  }
+  .topbar nav a:hover{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+
+  /* ── Hero ──────────────────────────────────────────── */
+  header.hero{padding:56px 0 34px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;
+    text-transform:uppercase;letter-spacing:.09em;color:var(--teal);
+    background:var(--teal-soft);padding:6px 12px;border-radius:999px;margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(1.9rem,4.2vw,3rem);max-width:20ch}
+  .hero .sub{color:var(--muted);max-width:62ch;font-size:1.02rem}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .chip{
+    font-size:.78rem;color:var(--muted);background:#fff;border:1px solid var(--line);
+    padding:6px 11px;border-radius:999px;
+  }
+
+  /* ── Score ─────────────────────────────────────────── */
+  .score-card{
+    display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px;box-shadow:var(--shadow);margin:34px 0 8px;
+  }
+  .ring{
+    --val:58;
+    width:168px;height:168px;border-radius:50%;flex:0 0 auto;position:relative;
+    background:conic-gradient(var(--teal) calc(var(--val)*1%), #e6eaef 0);
+    display:grid;place-items:center;
+  }
+  .ring::before{
+    content:"";position:absolute;inset:14px;border-radius:50%;background:#fff;
+    box-shadow:inset 0 0 0 1px var(--line);
+  }
+  .ring b{position:relative;font-size:2.7rem;letter-spacing:-.04em;line-height:1}
+  .ring small{position:relative;display:block;text-align:center;color:var(--muted);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+  .verdict h3{font-size:1.35rem;margin-bottom:.35em}
+  .verdict p{color:var(--muted);margin-bottom:.6em}
+  .verdict .tag{
+    display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;
+    color:var(--amber);background:var(--amber-soft);padding:5px 10px;border-radius:6px;
+  }
+
+  /* ── Sections ──────────────────────────────────────── */
+  section{padding:44px 0 8px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+  .sec-head .num{
+    font-size:.75rem;font-weight:700;color:var(--teal);background:var(--teal-soft);
+    padding:4px 9px;border-radius:6px;letter-spacing:.06em;
+  }
+  .sec-head h2{font-size:1.55rem;margin:0}
+  .lead{color:var(--muted);max-width:72ch;margin-bottom:22px}
+
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);
+  }
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:860px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.score-card{grid-template-columns:1fr;justify-items:center;text-align:center}.verdict{text-align:left}}
+
+  /* KPI tiles */
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .kpi .label{font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+  .kpi .value{font-size:1.55rem;font-weight:700;letter-spacing:-.03em;margin-top:4px}
+  .kpi .note{font-size:.8rem;color:var(--muted);margin-top:2px}
+
+  /* Bars */
+  .bars{display:grid;gap:14px}
+  .bar-row{display:grid;grid-template-columns:190px 1fr 44px;gap:14px;align-items:center}
+  .bar-row .name{font-size:.88rem;font-weight:600}
+  .track{height:9px;border-radius:99px;background:#e9edf2;overflow:hidden}
+  .fill{height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+  .fill.low{background:linear-gradient(90deg,#dc6803,#f79009)}
+  .fill.mid{background:linear-gradient(90deg,#0e9384,#14b8a6)}
+  .fill.high{background:linear-gradient(90deg,#067647,#12b76a)}
+  .bar-row .val{font-size:.85rem;font-weight:700;text-align:right;color:var(--muted)}
+  @media(max-width:640px){.bar-row{grid-template-columns:1fr 44px}.bar-row .track{grid-column:1/-1;order:3}}
+
+  /* Findings */
+  .finding{display:grid;grid-template-columns:6px 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+  .finding .rail{background:var(--amber)}
+  .finding[data-p="alta"] .rail{background:var(--red)}
+  .finding[data-p="baja"] .rail{background:#98a2b3}
+  .finding .body{padding:18px 20px}
+  .finding h4{font-size:1rem;margin-bottom:.35em}
+  .finding p{font-size:.9rem;color:var(--muted);margin-bottom:.55em}
+  .finding .fix{font-size:.87rem;color:var(--ink);background:var(--teal-soft);border-radius:8px;padding:9px 12px}
+  .finding .fix b{color:var(--teal)}
+  .pill{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:5px;vertical-align:middle;margin-left:6px}
+  .pill.alta{background:var(--red-soft);color:var(--red)}
+  .pill.media{background:var(--amber-soft);color:var(--amber)}
+  .pill.baja{background:#eef2f6;color:#475467}
+
+  /* Journey */
+  .journey{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:8px}
+  .step{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 12px}
+  .step .dot{width:9px;height:9px;border-radius:50%;background:var(--teal);margin-bottom:8px}
+  .step h5{font-size:.8rem;margin:0 0 4px;letter-spacing:-.01em}
+  .step p{font-size:.74rem;color:var(--muted);margin:0}
+  .step.gap{border-style:dashed;border-color:#f04438;background:#fffbfa}
+  .step.gap .dot{background:#f04438}
+  .step .flag{position:absolute;top:-9px;right:8px;font-size:.62rem;font-weight:700;background:var(--red);color:#fff;padding:2px 6px;border-radius:4px}
+  @media(max-width:900px){.journey{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){.journey{grid-template-columns:1fr 1fr}}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;font-size:.88rem;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f8fafc;font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  td.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  /* Before/after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+  .ba .box{border-radius:10px;padding:14px 16px;font-size:.88rem}
+  .ba .before{background:#fff5f4;border:1px solid #fecdca}
+  .ba .after{background:var(--green-soft);border:1px solid #abefc6}
+  .ba .tag{display:block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;opacity:.75}
+  @media(max-width:700px){.ba{grid-template-columns:1fr}}
+
+  /* Quick wins */
+  .win{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:10px;padding:16px 18px}
+  .win .n{font-size:.8rem;font-weight:700;color:#fff;background:var(--teal);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto}
+  .win h4{font-size:.94rem;margin:0 0 3px}
+  .win p{font-size:.83rem;color:var(--muted);margin:0}
+
+  footer{padding:44px 0 60px;color:var(--muted);font-size:.8rem}
+  footer .rule{height:1px;background:var(--line);margin-bottom:18px}
+
+  /* Print */
+  @media print{
+    :root{--shadow:none}
+    body{background:#fff;font-size:11.5px}
+    .topbar{display:none}
+    section{padding:22px 0 4px;break-inside:avoid}
+    .card,.finding,table,.win{break-inside:avoid}
+    .fill{transition:none}
+    a{color:inherit;text-decoration:none}
+    header.hero{padding:0 0 12px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">Sonrisa Norte <span>· auditoría digital</span></div>
+    <nav>
+      <a href="#resumen">Resumen</a>
+      <a href="#score">Puntuación</a>
+      <a href="#hallazgos">Hallazgos</a>
+      <a href="#journey">Journey</a>
+      <a href="#areas">Áreas</a>
+      <a href="#plan">Plan</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <div class="eyebrow">Informe de auditoría · 24 nov 2026</div>
+  <h1>Clínica Dental Sonrisa Norte</h1>
+  <p class="sub">Auditoría de presencia digital completa: web, redes, oferta y precios, copy, anuncios, ficha de Google y recorrido del paciente. Datos recogidos el 20–24 de noviembre de 2026.</p>
+  <div class="meta">
+    <span class="chip">📍 Valencia · Ruzafa</span>
+    <span class="chip">🦷 Odontología general + ortodoncia invisible</span>
+    <span class="chip">🌐 sonrisanorte.es</span>
+    <span class="chip">📸 @sonrisanorte.dental · 4.812 seguidores</span>
+    <span class="chip">📊 Muestra: 42 publicaciones, 18 reseñas</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- SCORE -->
+  <div class="score-card" id="score">
+    <div class="ring" style="--val:58" role="img" aria-label="Puntuación global 58 sobre 100">
+      <div>
+        <b>58</b>
+        <small>/ 100</small>
+      </div>
+    </div>
+    <div class="verdict">
+      <h3>Base sólida, ejecución digital desconectada</h3>
+      <p>La clínica tiene un producto claro, buenas reseñas y una web correcta. El problema no es la calidad del servicio: es que <strong>cada canal cuenta una historia distinta</strong> y no existe un sistema para convertir interés en cita.</p>
+      <p>La mayor fuga está entre «me interesa» y «pido cita»: el 78&nbsp;% de los usuarios que llegan desde Instagram no encuentran el precio ni un canal de contacto inmediato.</p>
+      <span class="tag">Prioridad: cerrar la incoherencia de precios y activar captación</span>
+    </div>
+  </div>
+
+  <div class="grid-4" style="margin-top:18px">
+    <div class="kpi"><div class="label">Reseñas Google</div><div class="value">4,6 ★</div><div class="note">18 reseñas · 2 sin responder</div></div>
+    <div class="kpi"><div class="label">Conversión estimada</div><div class="value">1,4 %</div><div class="note">web → cita (sector: 2,8 %)</div></div>
+    <div class="kpi"><div class="label">Anuncios activos</div><div class="value">3</div><div class="note">desde hace 4 meses</div></div>
+    <div class="kpi"><div class="label">Email capturado</div><div class="value">0</div><div class="note">sin formulario ni lead magnet</div></div>
+  </div>
+
+  <!-- RESUMEN -->
+  <section id="resumen">
+    <div class="sec-head"><span class="num">01</span><h2>Resumen ejecutivo</h2></div>
+    <div class="grid-3">
+      <div class="card">
+        <h4>Dónde está</h4>
+        <p style="font-size:.92rem;color:var(--muted);margin:0">Marca local reconocida en Ruzafa, con 12 años de actividad, 4,6★ en Google y una cartera de servicios bien definida. La web transmite confianza y el equipo aparece con nombre y foto, algo que la competencia directa no hace.</p>
+      </div>
+      <div class="card">
+        <h4>Por qué no crece</h4>
+        <p style="font-size:.92rem;color:var(--muted);margin:0">Tres ofertas de precio distintas conviven en Instagram, la web y los anuncios. El paciente compara, duda y se va. Además, toda la conversión depende del teléfono en horario de oficina: fuera de ese horario no hay forma de reservar.</p>
+      </div>
+      <div class="card">
+        <h4>Qué puede ganar</h4>
+        <p style="font-size:.92rem;color:var(--muted);margin:0">Con unificar precios, añadir reserva online y capturar email, el escenario conservador proyecta pasar de ~14 a ~26 citas mensuales desde canales digitales, sin aumentar inversión publicitaria.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREAKDOWN -->
+  <section>
+    <div class="sec-head"><span class="num">02</span><h2>Puntuación por área</h2></div>
+    <p class="lead">Escala 0–100. Cada área se evalúa con evidencia observable, no con impresiones. Las áreas por debajo de 50 concentran el 80&nbsp;% del impacto potencial.</p>
+    <div class="card">
+      <div class="bars" id="bars">
+        <div class="bar-row"><span class="name">Web y UX</span><div class="track"><div class="fill mid" data-w="64"></div></div><span class="val">64</span></div>
+        <div class="bar-row"><span class="name">SEO</span><div class="track"><div class="fill low" data-w="48"></div></div><span class="val">48</span></div>
+        <div class="bar-row"><span class="name">Redes sociales</span><div class="track"><div class="fill low" data-w="52"></div></div><span class="val">52</span></div>
+        <div class="bar-row"><span class="name">Anuncios (Meta Ads)</span><div class="track"><div class="fill low" data-w="35"></div></div><span class="val">35</span></div>
+        <div class="bar-row"><span class="name">Copy y comunicación</span><div class="track"><div class="fill low" data-w="55"></div></div><span class="val">55</span></div>
+        <div class="bar-row"><span class="name">Oferta y precios</span><div class="track"><div class="fill mid" data-w="70"></div></div><span class="val">70</span></div>
+        <div class="bar-row"><span class="name">Customer journey</span><div class="track"><div class="fill low" data-w="45"></div></div><span class="val">45</span></div>
+        <div class="bar-row"><span class="name">Google Business</span><div class="track"><div class="fill high" data-w="78"></div></div><span class="val">78</span></div>
+        <div class="bar-row"><span class="name">Contenido</span><div class="track"><div class="fill low" data-w="40"></div></div><span class="val">40</span></div>
+        <div class="bar-row"><span class="name">Reputación</span><div class="track"><div class="fill mid" data-w="72"></div></div><span class="val">72</span></div>
+        <div class="bar-row"><span class="name">Coherencia de marca</span><div class="track"><div class="fill mid" data-w="61"></div></div><span class="val">61</span></div>
+        <div class="bar-row"><span class="name">Competencia</span><div class="track"><div class="fill low" data-w="50"></div></div><span class="val">50</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINDINGS -->
+  <section id="hallazgos">
+    <div class="sec-head"><span class="num">03</span><h2>Incoherencias y errores detectados</h2></div>
+    <p class="lead">Ordenados por impacto sobre la conversión. Cada hallazgo incluye la corrección concreta, no una recomendación genérica.</p>
+
+    <div style="display:grid;gap:12px">
+      <div class="finding" data-p="alta">
+        <div class="rail"></div>
+        <div class="body">
+          <h4>Tres precios distintos para la primera visita <span class="pill alta">Alta</span></h4>
+          <p>Instagram anuncia «primera visita gratis», la web muestra «60&nbsp;€ (incluye radiografía)» y el anuncio de Meta promete «20&nbsp;% de descuento en tu primera cita». Un paciente que compara los tres canales concluye que la comunicación no es fiable.</p>
+          <div class="fix"><b>Corrección:</b> una única oferta canónica — «Primera visita + radiografía de diagnóstico: 30&nbsp;€, gratuita si contratas tratamiento» — replicada literalmente en web, bio, anuncios y ficha de Google.</div>
+        </div>
+      </div>
+
+      <div class="finding" data-p="alta">
+        <div class="rail"></div>
+        <div class="body">
+          <h4>La reserva solo existe por teléfono en horario de oficina <span class="pill alta">Alta</span></h4>
+          <p>El 61&nbsp;% del tráfico de Instagram llega entre 21:00 y 00:00. En esa franja la única vía de contacto es un formulario que promete responder «en 24–48&nbsp;h». La fricción explica la conversión del 1,4&nbsp;%.</p>
+          <div class="fix"><b>Corrección:</b> reserva online (Calendly o widget propio) con huecos reales + WhatsApp Business con respuesta automática fuera de horario. Objetivo: cita en menos de 90 segundos desde el móvil.</div>
+        </div>
+      </div>
+
+      <div class="finding" data-p="alta">
+        <div class="rail"></div>
+        <div class="body">
+          <h4>Los anuncios llevan a la home, no a la oferta anunciada <span class="pill alta">Alta</span></h4>
+          <p>Los 3 anuncios activos promocionan ortodoncia invisible, pero el destino es la home genérica. El usuario tiene que buscar el servicio, y el precio no aparece en ningún punto del recorrido.</p>
+          <div class="fix"><b>Corrección:</b> landing específica de ortodoncia invisible con precio orientativo, casos reales (con consentimiento), financiación y CTA de reserva. Un destino por anuncio.</div>
+        </div>
+      </div>
+
+      <div class="finding" data-p="media">
+        <div class="rail"></div>
+        <div class="body">
+          <h4>Bio de Instagram desalineada con el contenido <span class="pill media">Media</span></h4>
+          <p>La bio se define como «especialistas en ortodoncia invisible», pero 34 de las últimas 42 publicaciones tratan sobre blanqueamiento y limpiezas. El visitante que llega buscando ortodoncia no encuentra prueba de esa especialización.</p>
+          <div class="fix"><b>Corrección:</b> decidir el posicionamiento (generalista de confianza u ortodoncia) y ajustar bio + parrilla. Si se mantiene ortodoncia, mínimo 60&nbsp;% del contenido debe ser de esa línea.</div>
+        </div>
+      </div>
+
+      <div class="finding" data-p="media">
+        <div class="rail"></div>
+        <div class="body">
+          <h4>Blog abandonado con la última entrada hace 14 meses <span class="pill media">Media</span></h4>
+          <p>9 artículos indexados, ninguno actualizado. Generan el 23&nbsp;% del tráfico orgánico pero varios muestran precios antiguos (2024), lo que contradice la web actual.</p>
+          <div class="fix"><b>Corrección:</b> actualizar los 4 artículos con más tráfico (precios, fechas, enlaces internos) o despublicar los obsoletos. Un artículo obsoleto resta más de lo que suma.</div>
+        </div>
+      </div>
+
+      <div class="finding" data-p="media">
+        <div class="rail"></div>
+        <div class="body">
+          <h4>Cero captación de email y cero seguimiento post-venta <span class="pill media">Media</span></h4>
+          <p>No hay formulario, lead magnet ni newsletter. Tras la primera cita no existe ningún email de seguimiento ni recordatorio de revisión. Todo el valor se limita al paciente que vuelve por iniciativa propia.</p>
+          <div class="fix"><b>Corrección:</b> guía descargable («5 preguntas antes de elegir ortodoncia») + secuencia de 3 emails post-consulta + recordatorio de revisión a los 6 meses.</div>
+        </div>
+      </div>
+
+      <div class="finding" data-p="baja">
+        <div class="rail"></div>
+        <div class="body">
+          <h4>Horario desactualizado en Google Business <span class="pill baja">Baja</span></h4>
+          <p>La ficha indica cierre a las 19:00; la web y el local cierran a las 20:30. Afecta a la confianza y a la categoría «abierto ahora».</p>
+          <div class="fix"><b>Corrección:</b> sincronizar horarios (incluidos festivos) en Google Business, web, Instagram y Apple Maps el mismo día.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section id="journey">
+    <div class="sec-head"><span class="num">04</span><h2>Customer journey</h2></div>
+    <p class="lead">Recorrido completo del paciente. En rojo, las fases que no existen o donde se pierde al usuario.</p>
+    <div class="journey">
+      <div class="step"><div class="dot"></div><h5>Descubrimiento</h5><p>Instagram y Google Maps. Buena visibilidad local, sin contenido que atraiga búsquedas.</p></div>
+      <div class="step"><div class="dot"></div><h5>Primera visita</h5><p>Web clara en 5 s: qué hace y dónde está. El precio no aparece.</p></div>
+      <div class="step"><div class="dot"></div><h5>Interés</h5><p>Casos y equipo generan confianza. Falta prueba social por servicio.</p></div>
+      <div class="step gap"><span class="flag">fuga 78 %</span><div class="dot"></div><h5>Conversión</h5><p>Solo teléfono en horario de oficina. Formulario con respuesta en 24–48 h.</p></div>
+      <div class="step gap"><span class="flag">no existe</span><div class="dot"></div><h5>Post-venta</h5><p>Sin email de bienvenida, sin instrucciones post-tratamiento, sin encuesta.</p></div>
+      <div class="step gap"><span class="flag">no existe</span><div class="dot"></div><h5>Retención</h5><p>Sin recordatorio de revisión ni programa de referidos.</p></div>
+    </div>
+  </section>
+
+  <!-- AREAS DETAIL -->
+  <section id="areas">
+    <div class="sec-head"><span class="num">05</span><h2>Desglose por área</h2></div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>Web y UX · 64</h4>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--green)">Bien:</b> carga en 1,9 s, HTTPS, responsive correcto, equipo con nombre y foto, aviso legal completo.</p>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--red)">Mal:</b> precios ocultos, 6 clics hasta contacto desde una ficha de servicio, sin WhatsApp, menú con 9 opciones en móvil.</p>
+        <p style="font-size:.9rem;margin:0"><b>Acciones:</b> precios orientativos por servicio, CTA fijo en móvil, reducir menú a 5, añadir WhatsApp.</p>
+      </div>
+      <div class="card">
+        <h4>SEO · 48</h4>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--green)">Bien:</b> ficha de Google bien optimizada, 18 reseñas, categoría correcta.</p>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--red)">Mal:</b> sin páginas por servicio, títulos duplicados en 4 URLs, sin schema <code>Dentist</code>, blog obsoleto.</p>
+        <p style="font-size:.9rem;margin:0"><b>Acciones:</b> una página por servicio (6), schema local, corregir títulos, actualizar 4 artículos.</p>
+      </div>
+      <div class="card">
+        <h4>Redes sociales · 52</h4>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--green)">Bien:</b> frecuencia estable (3/semana), rostro humano del equipo, respuestas rápidas en comentarios.</p>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--red)">Mal:</b> bio sin CTA, enlace a home, 0 destacados de casos/precios, contenido mayoritariamente de blanqueamiento.</p>
+        <p style="font-size:.9rem;margin:0"><b>Acciones:</b> destacados «Casos», «Precios», «Equipo»; enlace a landing de ortodoncia; 3 reels/mes de casos reales.</p>
+      </div>
+      <div class="card">
+        <h4>Meta Ads · 35</h4>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--green)">Bien:</b> 3 anuncios activos desde hace 4 meses (señal de rentabilidad), segmentación local correcta.</p>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--red)">Mal:</b> creatividades estáticas idénticas, sin landing específica, promesa de descuento que no existe en destino.</p>
+        <p style="font-size:.9rem;margin:0"><b>Acciones:</b> 2 variantes de creatividad por anuncio, landing por servicio, píxel de conversión en reserva.</p>
+      </div>
+      <div class="card">
+        <h4>Google Business · 78</h4>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--green)">Bien:</b> ficha reclamada, 32 fotos, 4,6★, responde a reseñas positivas.</p>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--red)">Mal:</b> horario desactualizado, 2 reseñas negativas sin respuesta desde marzo, sin publicaciones recientes.</p>
+        <p style="font-size:.9rem;margin:0"><b>Acciones:</b> corregir horario, responder las 2 reseñas, publicar 1 novedad/mes, pedir reseña tras cada tratamiento.</p>
+      </div>
+      <div class="card">
+        <h4>Competencia · 50</h4>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--green)">Ventaja:</b> única clínica del barrio con equipo visible y 12 años de antigüedad comunicables.</p>
+        <p style="font-size:.9rem;color:var(--muted)"><b style="color:var(--red)">Desventaja:</b> los dos competidores directos ya ofrecen reserva online y financiación visible.</p>
+        <p style="font-size:.9rem;margin:0"><b>Acciones:</b> comunicar antigüedad y equipo como diferenciador; igualar reserva online y financiación.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COPY -->
+  <section>
+    <div class="sec-head"><span class="num">06</span><h2>Copy y comunicación</h2></div>
+    <p class="lead">El copy habla del proceso clínico, no del resultado que busca el paciente. Tres reescrituras concretas:</p>
+    <div class="card">
+      <div class="ba">
+        <div class="box before"><span class="tag">Antes</span>«Contamos con tecnología de última generación y un equipo altamente cualificado.»</div>
+        <div class="box after"><span class="tag">Después</span>«Sabrás qué tratamiento necesitas, cuánto cuesta y cuánto dura en la primera visita. Sin sorpresas.»</div>
+      </div>
+      <div class="ba">
+        <div class="box before"><span class="tag">Antes</span>«Pide cita» <em>(botón genérico, sin contexto)</em></div>
+        <div class="box after"><span class="tag">Después</span>«Reserva tu diagnóstico · 30 € · huecos hoy y mañana»</div>
+      </div>
+      <div class="ba">
+        <div class="box before"><span class="tag">Antes</span>«Somos especialistas en ortodoncia invisible.»</div>
+        <div class="box after"><span class="tag">Después</span>«Alineamos tus dientes en 6–14 meses con férulas transparentes. Primera valoración con escáner 3D incluida.»</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section id="plan">
+    <div class="sec-head"><span class="num">07</span><h2>Plan de acción priorizado</h2></div>
+    <table>
+      <thead>
+        <tr><th>Prioridad</th><th>Acción</th><th>Impacto</th><th>Esfuerzo</th><th>Área</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="pill alta">P1</span></td><td>Unificar la oferta de primera visita en todos los canales</td><td>Alto</td><td>Bajo</td><td>Oferta</td></tr>
+        <tr><td><span class="pill alta">P1</span></td><td>Activar reserva online + WhatsApp fuera de horario</td><td>Alto</td><td>Medio</td><td>Journey</td></tr>
+        <tr><td><span class="pill alta">P1</span></td><td>Landing de ortodoncia invisible con precio y CTA</td><td>Alto</td><td>Medio</td><td>Ads / Web</td></tr>
+        <tr><td><span class="pill media">P2</span></td><td>Responder las 2 reseñas negativas y corregir horario</td><td>Medio</td><td>Bajo</td><td>Reputación</td></tr>
+        <tr><td><span class="pill media">P2</span></td><td>Reescribir home y fichas de servicio con precios orientativos</td><td>Medio</td><td>Medio</td><td>Copy / Web</td></tr>
+        <tr><td><span class="pill media">P2</span></td><td>Guía descargable + secuencia de 3 emails post-consulta</td><td>Medio</td><td>Medio</td><td>Captación</td></tr>
+        <tr><td><span class="pill baja">P3</span></td><td>Actualizar o despublicar 4 artículos obsoletos del blog</td><td>Bajo</td><td>Bajo</td><td>SEO</td></tr>
+        <tr><td><span class="pill baja">P3</span></td><td>Schema <code>Dentist</code> y páginas por servicio</td><td>Medio</td><td>Alto</td><td>SEO</td></tr>
+        <tr><td><span class="pill baja">P3</span></td><td>Programa de referidos y recordatorio de revisión</td><td>Medio</td><td>Medio</td><td>Retención</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- QUICK WINS -->
+  <section>
+    <div class="sec-head"><span class="num">08</span><h2>Quick wins de esta semana</h2></div>
+    <div style="display:grid;gap:10px">
+      <div class="win"><span class="n">1</span><div><h4>Fijar un único precio de primera visita</h4><p>30 € canónicos en web, bio, ads y Google. 2 h de trabajo. Elimina la objeción principal.</p></div></div>
+      <div class="win"><span class="n">2</span><div><h4>Responder las 2 reseñas negativas</h4><p>Respuesta pública, concreta y sin defensiva. 20 min. Recupera confianza de quien lee.</p></div></div>
+      <div class="win"><span class="n">3</span><div><h4>WhatsApp Business con mensaje automático</h4><p>«Gracias por escribir. Reserva aquí o te llamamos mañana a las 9:00». 1 h. Captura el tráfico nocturno.</p></div></div>
+      <div class="win"><span class="n">4</span><div><h4>Cambiar el enlace de la bio a la landing de ortodoncia</h4><p>5 min. Alinea el anuncio con el destino real.</p></div></div>
+      <div class="win"><span class="n">5</span><div><h4>Corregir el horario en Google Business</h4><p>10 min. Recupera la categoría «abierto ahora» y evita llamadas perdidas.</p></div></div>
+    </div>
+  </section>
+
+  <!-- COMPETITION -->
+  <section>
+    <div class="sec-head"><span class="num">09</span><h2>Comparativa de competencia</h2></div>
+    <table>
+      <thead><tr><th>Criterio</th><th>Sonrisa Norte</th><th>Dental Aura</th><th>Clínica Turia</th></tr></thead>
+      <tbody>
+        <tr><td>Reserva online</td><td>No</td><td>Sí</td><td>Sí</td></tr>
+        <tr><td>Precios visibles</td><td>Parcial</td><td>Sí (desde)</td><td>No</td></tr>
+        <tr><td>Financiación</td><td>Solo en consulta</td><td>Sí, 0 % 12 meses</td><td>Sí</td></tr>
+        <tr><td>Reseñas Google</td><td>4,6 ★ (18)</td><td>4,8 ★ (54)</td><td>4,4 ★ (31)</td></tr>
+        <tr><td>Equipo visible en web</td><td>Sí</td><td>No</td><td>Sí (parcial)</td></tr>
+        <tr><td>Contenido / blog activo</td><td>No (14 meses)</td><td>Sí (mensual)</td><td>No</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <div class="rule"></div>
+    <p><strong>Nota metodológica.</strong> Informe generado por la skill <code>auditoria-negocio</code> del repositorio <em>claude-skill-factory-es</em>. La empresa auditada es ficticia y los datos son sintéticos, creados para demostrar el formato de salida. No contiene información de personas reales.</p>
+    <p>Evidencia recogida: 42 publicaciones de Instagram, 18 reseñas públicas, 9 URLs del sitio, 3 anuncios activos en la Biblioteca de Meta, ficha de Google Business y 2 competidores directos. Fecha de corte: 24/11/2026.</p>
+  </footer>
+
+</main>
+
+<script>
+  // Animated score bars
+  const bars = document.querySelectorAll('.fill');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const paint = el => { el.style.width = el.dataset.w + '%'; };
+  if (reduce || !('IntersectionObserver' in window)) {
+    bars.forEach(paint);
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { paint(e.target); io.unobserve(e.target); }
+      });
+    }, { threshold: .25 });
+    bars.forEach(b => io.observe(b));
+  }
+</script>
+</body>
+</html>

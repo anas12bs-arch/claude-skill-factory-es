@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica Dental Sonrisa Norte · Odontología en Ruzafa, Valencia</title>
+<meta name="description" content="Clínica dental en Ruzafa, Valencia. Odontología general, ortodoncia invisible y estética dental. Primera visita con diagnóstico y escáner 3D.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbfaf7; --paper-2:#f3efe7; --ink:#15201d; --muted:#5d6b66;
+    --teal:#0f5f57; --teal-2:#17847a; --mint:#dcefe9; --gold:#c9a227;
+    --line:rgba(21,32,29,.12);
+    --serif:"Fraunces",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  ::selection{background:var(--mint);color:var(--teal)}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+
+  /* custom scrollbar */
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:var(--paper-2)}
+  ::-webkit-scrollbar-thumb{background:#b9cfc8;border-radius:99px;border:3px solid var(--paper-2)}
+  ::-webkit-scrollbar-thumb:hover{background:var(--teal-2)}
+
+  .wrap{width:min(1180px,92vw);margin-inline:auto}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--teal);font-weight:600;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--teal);opacity:.5}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;line-height:1.08}
+  h2{font-size:clamp(2rem,4.4vw,3.4rem)}
+  .lead{color:var(--muted);font-size:1.05rem;max-width:58ch}
+
+  /* ── NAV ─────────────────────────────────────────── */
+  header.nav{
+    position:fixed;inset:0 0 auto;z-index:100;transition:background .4s,box-shadow .4s,padding .4s;
+    padding:18px 0;
+  }
+  header.nav.scrolled{
+    background:rgba(251,250,247,.82);backdrop-filter:blur(16px) saturate(160%);
+    box-shadow:0 1px 0 var(--line);padding:10px 0;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .logo{display:flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--serif);font-size:1.15rem;letter-spacing:-.01em}
+  .logo .mark{
+    width:34px;height:34px;border-radius:50%;background:var(--teal);display:grid;place-items:center;
+    color:#fff;font-size:.9rem;font-family:var(--serif);flex:0 0 auto;
+  }
+  .logo small{display:block;font-family:var(--sans);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{
+    text-decoration:none;font-size:.84rem;font-weight:500;color:var(--ink);opacity:.78;
+    position:relative;padding:4px 0;transition:opacity .25s;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--teal);transition:width .3s;
+  }
+  .nav-links a:hover{opacity:1}
+  .nav-links a:hover::after{width:100%}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-size:.84rem;font-weight:600;
+    padding:12px 22px;border-radius:999px;background:var(--teal);color:#fff;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,background .3s;
+    box-shadow:0 8px 20px -10px rgba(15,95,87,.7);
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -14px rgba(15,95,87,.8);background:#0c4f48}
+  .btn.ghost{background:transparent;color:var(--teal);box-shadow:none;border:1px solid var(--line)}
+  .btn.ghost:hover{background:#fff;border-color:var(--teal);transform:translateY(-2px)}
+  .menu-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .menu-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);margin:5px 0;transition:.3s}
+
+  /* ── HERO ────────────────────────────────────────── */
+  .hero{position:relative;min-height:100svh;display:grid;align-items:center;padding:130px 0 70px;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;will-change:transform}
+  .blob.a{width:520px;height:520px;background:#cfe9e0;top:-140px;right:-120px}
+  .blob.b{width:420px;height:420px;background:#f0e4c8;bottom:-120px;left:-140px;opacity:.6}
+  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+  .hero h1{font-size:clamp(2.7rem,6.4vw,5.1rem);margin:18px 0 22px}
+  .hero h1 em{font-style:italic;color:var(--teal);position:relative;white-space:nowrap}
+  .hero h1 em::after{
+    content:"";position:absolute;left:0;right:0;bottom:.04em;height:.34em;background:var(--mint);
+    z-index:-1;transform:scaleX(0);transform-origin:left;animation:underline 1s .7s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  @keyframes underline{to{transform:scaleX(1)}}
+  .hero p.lead{font-size:1.12rem;margin-bottom:32px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .hero-note{font-size:.78rem;color:var(--muted);margin-top:18px;display:flex;gap:16px;flex-wrap:wrap}
+  .hero-note span{display:flex;align-items:center;gap:6px}
+  .dot-live{width:6px;height:6px;border-radius:50%;background:#2e9e5b;box-shadow:0 0 0 0 rgba(46,158,91,.5);animation:pulse 2s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(46,158,91,0)}100%{box-shadow:0 0 0 0 rgba(46,158,91,0)}}
+
+  /* hero visual */
+  .hero-visual{position:relative;aspect-ratio:4/5;max-height:600px}
+  .photo{
+    position:absolute;inset:0;border-radius:200px 200px 24px 24px;overflow:hidden;
+    background:
+      radial-gradient(120% 80% at 30% 10%, #eaf6f1 0%, transparent 60%),
+      linear-gradient(160deg,#d7ece4,#b9d8cd 55%,#9dc4b7);
+    box-shadow:0 40px 80px -50px rgba(15,95,87,.55);
+    display:grid;place-items:center;
+  }
+  .photo::after{
+    content:"[FOTO REAL DEL EQUIPO]";position:absolute;bottom:18px;left:0;right:0;text-align:center;
+    font-size:.62rem;letter-spacing:.2em;color:rgba(15,95,87,.55);
+  }
+  .photo .tooth{
+    font-size:9rem;line-height:1;opacity:.35;filter:grayscale(1);
+  }
+  .float-card{
+    position:absolute;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.8);border-radius:16px;padding:14px 18px;
+    box-shadow:0 24px 50px -30px rgba(21,32,29,.45);
+  }
+  .float-card.fc1{left:-26px;top:22%;animation:floaty 7s ease-in-out infinite}
+  .float-card.fc2{right:-18px;bottom:16%;animation:floaty 8.5s ease-in-out infinite reverse}
+  .float-card .k{font-family:var(--serif);font-size:1.5rem;line-height:1;color:var(--teal)}
+  .float-card .l{font-size:.68rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+  @keyframes floaty{50%{transform:translateY(-14px)}}
+
+  /* ── SECTIONS ───────────────────────────────────── */
+  section{padding:110px 0;position:relative}
+  .sec-head{max-width:720px;margin-bottom:56px}
+  .sec-head h2{margin:16px 0 18px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+  .reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.4s}.reveal.d6{transition-delay:.48s}
+
+  /* about */
+  .about{background:var(--paper-2);border-block:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .about-copy p{color:var(--muted);margin-bottom:18px}
+  .about-copy p strong{color:var(--ink);font-weight:600}
+  .signature{font-family:var(--serif);font-size:1.1rem;color:var(--teal);margin-top:26px}
+  .signature small{display:block;font-family:var(--sans);font-size:.72rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .stat{background:var(--paper);padding:34px 26px}
+  .stat .n{font-family:var(--serif);font-size:2.7rem;line-height:1;color:var(--teal);letter-spacing:-.03em}
+  .stat .n span{font-size:1.4rem}
+  .stat .t{font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.5}
+
+  /* services */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 28px;
+    position:relative;overflow:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s,border-color .45s;
+  }
+  .card::before{
+    content:"";position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-2));
+    transform:scaleX(0);transform-origin:left;transition:transform .5s;
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -40px rgba(21,32,29,.5);border-color:rgba(15,95,87,.28)}
+  .card:hover::before{transform:scaleX(1)}
+  .card .ico{
+    width:46px;height:46px;border-radius:13px;background:var(--mint);color:var(--teal);
+    display:grid;place-items:center;margin-bottom:20px;font-size:1.2rem;
+  }
+  .card h3{font-size:1.4rem;margin-bottom:10px}
+  .card p{font-size:.9rem;color:var(--muted);margin-bottom:18px;min-height:72px}
+  .card .price{display:flex;align-items:baseline;gap:6px;font-family:var(--serif);font-size:1.7rem;color:var(--teal)}
+  .card .price small{font-family:var(--sans);font-size:.72rem;color:var(--muted);font-weight:500;letter-spacing:.04em}
+  .card .tagline{font-size:.72rem;color:var(--muted);margin-top:6px}
+
+  /* gallery */
+  .gallery{background:var(--teal);color:#f6fbf9;overflow:hidden}
+  .gallery .sec-head p{color:rgba(246,251,249,.72)}
+  .gallery .eyebrow{color:#bfe3d9}
+  .gallery .eyebrow::before{background:#bfe3d9}
+  .gallery .sec-head h2{color:#fff}
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .ph{
+    aspect-ratio:3/4;border-radius:14px;position:relative;overflow:hidden;
+    background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
+    border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;
+    font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);
+    transition:transform .5s,background .5s;
+  }
+  .ph:nth-child(1){background:linear-gradient(150deg,#2a7d72,#1c5f56)}
+  .ph:nth-child(2){background:linear-gradient(150deg,#3f9184,#256a61);margin-top:34px}
+  .ph:nth-child(3){background:linear-gradient(150deg,#1c5f56,#123f39)}
+  .ph:nth-child(4){background:linear-gradient(150deg,#3f9184,#1c5f56);margin-top:34px}
+  .ph:hover{transform:scale(1.03)}
+
+  /* parallax quote */
+  .quote{background:var(--paper);overflow:hidden}
+  .quote blockquote{
+    font-family:var(--serif);font-size:clamp(1.6rem,3.4vw,2.7rem);line-height:1.28;letter-spacing:-.02em;
+    max-width:900px;margin-inline:auto;text-align:center;position:relative;z-index:2;
+  }
+  .quote blockquote em{color:var(--teal);font-style:italic}
+  .quote .mark{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);
+    font-size:26rem;line-height:1;color:var(--mint);z-index:0;pointer-events:none;user-select:none;
+  }
+  .quote cite{display:block;text-align:center;font-style:normal;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:28px}
+
+  /* testimonials */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .testi{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px}
+  .stars{color:var(--gold);letter-spacing:.12em;font-size:.9rem;margin-bottom:14px}
+  .testi p{font-size:.92rem;color:var(--ink);margin-bottom:20px}
+  .testi .who{display:flex;align-items:center;gap:12px}
+  .avatar{width:38px;height:38px;border-radius:50%;background:var(--mint);color:var(--teal);display:grid;place-items:center;font-family:var(--serif);font-size:.9rem}
+  .who b{display:block;font-size:.84rem;font-weight:600}
+  .who span{font-size:.72rem;color:var(--muted)}
+
+  /* contact */
+  .contact{background:var(--paper-2);border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+  .info-list{display:grid;gap:22px;margin-top:36px}
+  .info{display:flex;gap:16px}
+  .info .ic{width:40px;height:40px;border-radius:11px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;flex:0 0 auto;font-size:.95rem}
+  .info b{display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .info a,.info span{font-size:.95rem;text-decoration:none;color:var(--ink)}
+  .info a:hover{color:var(--teal)}
+  form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px;display:grid;gap:16px}
+  .field{display:grid;gap:6px}
+  .field label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .field input,.field select,.field textarea{
+    font:inherit;font-size:.92rem;padding:12px 14px;border:1px solid var(--line);border-radius:10px;
+    background:var(--paper);color:var(--ink);outline:none;transition:border-color .25s,box-shadow .25s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal-2);box-shadow:0 0 0 3px rgba(23,132,122,.12)}
+  .field textarea{resize:vertical;min-height:92px}
+  form .btn{justify-content:center;margin-top:6px}
+  .form-note{font-size:.7rem;color:var(--muted);text-align:center}
+
+  footer{background:var(--teal);color:rgba(246,251,249,.8);padding:56px 0 30px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.16)}
+  footer .logo{color:#fff}
+  footer .logo small{color:rgba(255,255,255,.6)}
+  footer .logo .mark{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3)}
+  footer p{font-size:.84rem;max-width:34ch;margin-top:16px;color:rgba(246,251,249,.65)}
+  footer h4{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:14px;font-weight:600;font-family:var(--sans)}
+  footer ul{list-style:none;display:grid;gap:9px}
+  footer ul a{text-decoration:none;font-size:.86rem;color:rgba(246,251,249,.7);transition:color .2s}
+  footer ul a:hover{color:#fff}
+  .foot-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.74rem;padding-top:22px;color:rgba(246,251,249,.55)}
+
+  /* responsive */
+  @media(max-width:980px){
+    .hero .wrap{grid-template-columns:1fr;gap:44px}
+    .hero-visual{max-width:420px;margin-inline:auto;aspect-ratio:1/1}
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+    .cards,.testi-grid{grid-template-columns:1fr 1fr}
+    .gal-grid{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+    .menu-toggle{display:block}
+    .nav-links.open{
+      display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+      background:rgba(251,250,247,.98);backdrop-filter:blur(16px);padding:10px 0;border-bottom:1px solid var(--line);
+    }
+    .nav-links.open a{padding:13px 6vw;width:100%}
+  }
+  @media(max-width:640px){
+    section{padding:76px 0}
+    .cards,.testi-grid,.stats{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .float-card.fc1{left:-8px}.float-card.fc2{right:-8px}
+    .quote .mark{font-size:16rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">
+      <span class="mark">SN</span>
+      <span>Sonrisa Norte<small>Clínica dental · Ruzafa</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#clinica">La clínica</a>
+      <a href="#servicios">Tratamientos</a>
+      <a href="#casos">Casos</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#contacto" class="btn" style="padding:9px 18px">Pedir cita</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="blob a" data-parallax="0.12"></div>
+  <div class="blob b" data-parallax="-0.08"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Odontología en Valencia desde 2014</span>
+      <h1>Tu sonrisa,<br>en manos <em>tranquilas</em>.</h1>
+      <p class="lead">Diagnóstico claro, precios que conoces antes de empezar y un equipo que lleva doce años cuidando a las familias de Ruzafa.</p>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn">Pedir primera visita · 30 €</a>
+        <a href="#servicios" class="btn ghost">Ver tratamientos</a>
+      </div>
+      <div class="hero-note">
+        <span><i class="dot-live"></i> Huecos disponibles esta semana</span>
+        <span>Escáner 3D incluido</span>
+        <span>Financiación sin intereses</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="photo">
+        <svg class="tooth" width="150" height="150" viewBox="0 0 24 24" fill="none" stroke="#0f5f57" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="opacity:.35">
+          <path d="M12 5.5c-1.6-1.4-3.2-2-4.6-1.6C5.6 4.4 4.5 6.4 4.5 9c0 1.4.3 2.6.7 4.1.4 1.6.7 3.3 1 4.9.2 1.3.6 2.5 1.6 2.5 1.1 0 1.4-1.4 1.7-3 .3-1.7.6-3 2.5-3s2.2 1.3 2.5 3c.3 1.6.6 3 1.7 3 1 0 1.4-1.2 1.6-2.5.3-1.6.6-3.3 1-4.9.4-1.5.7-2.7.7-4.1 0-2.6-1.1-4.6-2.9-5.1-1.4-.4-3 .2-4.6 1.6z"/>
+        </svg>
+      </div>
+      <div class="float-card fc1"><div class="k">4,6 ★</div><div class="l">18 reseñas en Google</div></div>
+      <div class="float-card fc2"><div class="k">+2.400</div><div class="l">Pacientes atendidos</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="clinica">
+  <div class="wrap about-grid">
+    <div class="about-copy reveal">
+      <span class="eyebrow">La clínica</span>
+      <h2 style="margin:16px 0 22px">Doce años en el mismo barrio, con las mismas caras.</h2>
+      <p>Sonrisa Norte abrió en 2014 en la calle Cádiz, a dos calles del mercado de Ruzafa. Desde entonces <strong>somos el mismo equipo</strong>: dos odontólogos generales, una ortodoncista y una higienista.</p>
+      <p>No trabajamos con comerciales ni con presupuestos que cambian al sentarte en el sillón. <strong>Verás el precio del tratamiento antes de empezar</strong> y sabrás cuántas visitas necesitas.</p>
+      <p>Atendemos en castellano y valenciano, y trabajamos con las principales aseguradoras.</p>
+      <div class="signature">Dra. Elena Miralles<small>Directora médica · Nº colegiada 46/12084</small></div>
+    </div>
+    <div class="stats reveal d2">
+      <div class="stat"><div class="n"><span data-count="12">0</span></div><div class="t">Años en Ruzafa</div></div>
+      <div class="stat"><div class="n"><span data-count="2400">0</span><span>+</span></div><div class="t">Pacientes atendidos</div></div>
+      <div class="stat"><div class="n"><span data-count="4">0</span>,6 ★</div><div class="t">Valoración media en Google</div></div>
+      <div class="stat"><div class="n"><span data-count="6">0</span></div><div class="t">Especialidades con equipo propio</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Tratamientos</span>
+      <h2>Precios claros, sin letra pequeña.</h2>
+      <p class="lead">Estos son los importes de partida. En la primera visita te damos el presupuesto cerrado por escrito, con el número exacto de sesiones.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="ico">✦</div>
+        <h3>Limpieza dental</h3>
+        <p>Higiene completa con ultrasonidos, pulido y revisión de encías. Recomendada cada 12 meses.</p>
+        <div class="price">55 € <small>/ sesión</small></div>
+        <div class="tagline">45 minutos · incluye revisión</div>
+      </article>
+      <article class="card reveal d1">
+        <div class="ico">◍</div>
+        <h3>Ortodoncia invisible</h3>
+        <p>Férulas transparentes para alinear los dientes sin brackets. Estudio con escáner 3D y simulación del resultado.</p>
+        <div class="price">2.400 € <small>/ tratamiento</small></div>
+        <div class="tagline">6–14 meses · financiación 0 %</div>
+      </article>
+      <article class="card reveal d2">
+        <div class="ico">◆</div>
+        <h3>Estética dental</h3>
+        <p>Blanqueamiento en clínica y carillas de composite. Resultados naturales, sin tallar el diente sano.</p>
+        <div class="price">320 € <small>/ desde</small></div>
+        <div class="tagline">1–2 sesiones · revisión a los 6 meses</div>
+      </article>
+      <article class="card reveal d3">
+        <div class="ico">✚</div>
+        <h3>Odontología general</h3>
+        <p>Empastes, endodoncias y extracciones. Tratamos la urgencia el mismo día si hay hueco disponible.</p>
+        <div class="price">70 € <small>/ desde</small></div>
+        <div class="tagline">Presupuesto cerrado antes de empezar</div>
+      </article>
+      <article class="card reveal d4">
+        <div class="ico">❍</div>
+        <h3>Implantes</h3>
+        <p>Implante de titanio con corona de zirconio. Incluye cirugía, prótesis y las revisiones del primer año.</p>
+        <div class="price">1.150 € <small>/ pieza</small></div>
+        <div class="tagline">Garantía de 5 años</div>
+      </article>
+      <article class="card reveal d5">
+        <div class="ico">◇</div>
+        <h3>Odontopediatría</h3>
+        <p>Selladores, fluorizaciones y primera visita sin miedo. Sala de espera con zona de juego.</p>
+        <div class="price">40 € <small>/ revisión</small></div>
+        <div class="tagline">Hasta 14 años · acompañamiento</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="casos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">La clínica por dentro</span>
+      <h2>Un sitio donde no te importa esperar.</h2>
+      <p class="lead">Luz natural, dos gabinetes y una sala de espera que no parece una sala de espera.</p>
+    </div>
+    <div class="gal-grid">
+      <div class="ph reveal">[FOTO · Recepción]</div>
+      <div class="ph reveal d1">[FOTO · Gabinete 1]</div>
+      <div class="ph reveal d2">[FOTO · Sala de espera]</div>
+      <div class="ph reveal d3">[FOTO · Equipo]</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="wrap">
+    <span class="mark" data-parallax="-0.05">”</span>
+    <blockquote class="reveal">«Entré con miedo y salí con <em>un plan claro</em>: qué me iban a hacer, cuánto costaba y cuándo terminaría. Nunca había pasado por algo así en un dentista.»</blockquote>
+    <cite class="reveal d2">Paciente de ortodoncia · 2025</cite>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="opiniones">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Opiniones</span>
+      <h2>Lo que dicen quienes ya se sientan en el sillón.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal">
+        <div class="stars">★★★★★</div>
+        <p>«Llevo a mis dos hijos desde 2019. Nunca nos han vendido nada que no necesitaran y siempre nos avisan del precio antes.»</p>
+        <div class="who"><div class="avatar">MC</div><div><b>María C.</b><span>Paciente desde 2019</span></div></div>
+      </div>
+      <div class="testi reveal d1">
+        <div class="stars">★★★★★</div>
+        <p>«Me hicieron el estudio de ortodoncia con escáner y vi el resultado antes de decidir. Un año después, encantado.»</p>
+        <div class="who"><div class="avatar">JL</div><div><b>Jorge L.</b><span>Ortodoncia invisible</span></div></div>
+      </div>
+      <div class="testi reveal d2">
+        <div class="stars">★★★★☆</div>
+        <p>«Pedí cita un viernes por la tarde por WhatsApp y me respondieron en diez minutos. Al día siguiente estaba arreglado.»</p>
+        <div class="who"><div class="avatar">RT</div><div><b>Rocío T.</b><span>Urgencia dental</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Pedir cita</span>
+      <h2 style="margin:16px 0 20px">Te llamamos nosotros.</h2>
+      <p class="lead">Déjanos tu nombre y un teléfono. Te escribimos en horario de clínica para darte hueco esta misma semana.</p>
+      <div class="info-list">
+        <div class="info"><div class="ic">📍</div><div><b>Dirección</b><span>Calle Cádiz 42, bajo · 46006 Valencia</span></div></div>
+        <div class="info"><div class="ic">🕘</div><div><b>Horario</b><span>Lunes a viernes 9:00–20:30 · Sábados 10:00–14:00</span></div></div>
+        <div class="info"><div class="ic">☎</div><div><b>Teléfono</b><a href="tel:+34960000000">960 00 00 00</a></div></div>
+        <div class="info"><div class="ic">✉</div><div><b>Email</b><a href="mailto:citas@sonrisanorte.es">citas@sonrisanorte.es</a></div></div>
+      </div>
+    </div>
+    <form action="mailto:citas@sonrisanorte.es" method="post" enctype="text/plain" class="reveal d2">
+      <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" required placeholder="Tu nombre"></div>
+      <div class="field"><label for="tel">Teléfono</label><input id="tel" name="telefono" type="tel" required placeholder="600 000 000"></div>
+      <div class="field"><label for="motivo">Motivo de la visita</label>
+        <select id="motivo" name="motivo">
+          <option>Primera visita / diagnóstico</option>
+          <option>Ortodoncia invisible</option>
+          <option>Limpieza dental</option>
+          <option>Estética dental</option>
+          <option>Urgencia</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="field"><label for="msg">¿Algo que debamos saber? (opcional)</label><textarea id="msg" name="mensaje" placeholder="Horario preferido, aseguradora, etc."></textarea></div>
+      <button class="btn" type="submit">Solicitar cita</button>
+      <p class="form-note">Al enviar aceptas nuestra política de privacidad. No compartimos tus datos.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo"><span class="mark">SN</span><span>Sonrisa Norte<small>Clínica dental · Ruzafa</small></span></a>
+        <p>Odontología general, ortodoncia invisible y estética dental en el barrio de Ruzafa desde 2014.</p>
+      </div>
+      <div>
+        <h4>Clínica</h4>
+        <ul>
+          <li><a href="#clinica">El equipo</a></li>
+          <li><a href="#servicios">Tratamientos y precios</a></li>
+          <li><a href="#casos">Instalaciones</a></li>
+          <li><a href="#opiniones">Opiniones</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:+34960000000">960 00 00 00</a></li>
+          <li><a href="mailto:citas@sonrisanorte.es">citas@sonrisanorte.es</a></li>
+          <li><a href="#contacto">Calle Cádiz 42, Valencia</a></li>
+          <li><a href="#contacto">Aviso legal y privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Clínica Dental Sonrisa Norte · Nº registro sanitario 00000</span>
+      <span>Demo ficticia generada con la skill <code>web-scrolling</code></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Sticky nav state */
+  const nav = document.getElementById('nav');
+  const onScrollNav = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScrollNav();
+
+  /* Mobile menu */
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    document.querySelectorAll('[data-count]').forEach(el => el.textContent = el.dataset.count);
+    return;
+  }
+
+  /* Reveal on scroll */
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+  /* Counters */
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const dur = 1500;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = Math.round(target * eased);
+      el.textContent = target >= 1000 ? val.toLocaleString('es-ES') : val;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCount(e.target); countIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+
+  /* Parallax (single rAF loop, passive) */
+  const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
+  let ticking = false;
+  const update = () => {
+    const y = window.scrollY;
+    onScrollNav();
+    parallaxEls.forEach(el => {
+      const speed = parseFloat(el.dataset.parallax);
+      el.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+    });
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
