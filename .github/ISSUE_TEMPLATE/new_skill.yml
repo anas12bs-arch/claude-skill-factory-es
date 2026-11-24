@@ -1,0 +1,49 @@
+name: New skill proposal
+description: Propose a new kit or a substantial change to an existing skill
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: process
+    attributes:
+      label: The process to encode
+      description: Describe the manual workflow step by step, as you would explain it to a colleague.
+      placeholder: |
+        1. I get a CSV of products
+        2. I check stock and margins
+        3. I generate a one-page sheet per product
+    validations:
+      required: true
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: Deliverable
+      description: What exact file should the skill produce? Format, filename, required sections.
+      placeholder: A single HTML file with one card per product, printable to A4.
+    validations:
+      required: true
+  - type: textarea
+    id: triggers
+    attributes:
+      label: Trigger phrases (Spanish)
+      description: How would a Spanish-speaking user ask for this, including imperfect phrasing?
+      placeholder: |
+        "genera las fichas de producto"
+        "saca un PDF por cada producto"
+    validations:
+      required: true
+  - type: textarea
+    id: inputs
+    attributes:
+      label: Required inputs
+      description: What must the user provide? What should the skill never invent?
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Scope check
+      options:
+        - label: This produces a concrete artifact, not general advice.
+          required: true
+        - label: This does not require a paid third-party service to run.
+          required: true

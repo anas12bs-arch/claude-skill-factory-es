@@ -8,6 +8,7 @@
 [![Claude Code Native](https://img.shields.io/badge/Claude_Code-native-1f2937?style=flat-square)](https://docs.claude.com/en/docs/claude-code)
 [![Spanish Ecosystem](https://img.shields.io/badge/ecosystem-espa%C3%B1ol-c9a227?style=flat-square)](#a-gap-in-the-ecosystem)
 [![Skills](https://img.shields.io/badge/skills-10-17847a?style=flat-square)](#the-kits)
+[![Validate skills](https://github.com/anas12bs-arch/claude-skill-factory-es/actions/workflows/validate.yml/badge.svg)](https://github.com/anas12bs-arch/claude-skill-factory-es/actions/workflows/validate.yml)
 
 ---
 

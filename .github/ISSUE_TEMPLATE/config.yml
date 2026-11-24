@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the contributing guide first
+    url: https://github.com/anas12bs-arch/claude-skill-factory-es/blob/main/CONTRIBUTING.md
+    about: Folder contract, frontmatter rules, quality bar and language policy.
+  - name: Security report
+    url: https://github.com/anas12bs-arch/claude-skill-factory-es/security/advisories/new
+    about: Report a leaked credential or vulnerability privately. Do not open a public issue.
