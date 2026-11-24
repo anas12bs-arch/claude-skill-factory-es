@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KURO · Omakase &amp; Robata · Barrio de Salamanca, Madrid</title>
+<meta name="description" content="Barra omakase de 12 plazas y parrilla robata de carbón binchotan en el Barrio de Salamanca, Madrid. Menú de temporada de 16 pases por el chef Kenji Takahashi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0908;
+    --bg-2:#12100e;
+    --surface:#181512;
+    --surface-2:#201c18;
+    --ink:#f4efe6;
+    --muted:#a1978a;
+    --subtle:#6f675d;
+    --gold:#c8a252;
+    --gold-hi:#dfc078;
+    --vermilion:#b83a28;
+    --line:rgba(244,239,230,.11);
+    --line-strong:rgba(200,162,82,.35);
+    --serif:"Cormorant Garamond",Georgia,serif;
+    --sans:"Plus Jakarta Sans",system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{
+    background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-weight:400;line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:#0a0908}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar{width:8px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:#2d2721;border-radius:99px}
+  ::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+
+  .wrap{width:min(1220px,90vw);margin-inline:auto}
+
+  /* Typographic helpers */
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-size:.69rem;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--gold);font-weight:500;
+  }
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--gold);opacity:.65}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;line-height:1.04}
+  h2{font-size:clamp(2.3rem,4.6vw,3.8rem)}
+  h2 em,h1 em{font-style:italic;color:var(--gold-hi)}
+  .lead{color:var(--muted);font-size:1rem;line-height:1.75;max-width:54ch}
+
+  /* Scroll progress bar */
+  .progress-bar{
+    position:fixed;top:0;left:0;height:2px;width:0;z-index:200;
+    background:linear-gradient(90deg,var(--vermilion),var(--gold),var(--gold-hi));
+    transition:width .08s linear;
+  }
+
+  /* ── NAV ─────────────────────────────────────────── */
+  header.nav{
+    position:fixed;inset:0 0 auto;z-index:120;padding:22px 0;
+    transition:background .4s ease,padding .4s ease,border-color .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.scrolled{
+    background:rgba(10,9,8,.84);backdrop-filter:blur(18px) saturate(140%);
+    padding:13px 0;border-bottom-color:var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:13px;text-decoration:none}
+  .hanko{
+    width:34px;height:34px;border:1px solid rgba(184,58,40,.85);
+    background:rgba(184,58,40,.14);color:#e25b47;
+    display:grid;place-items:center;font-family:var(--serif);font-size:1.05rem;
+    border-radius:4px;flex:0 0 auto;
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.05}
+  .brand-text strong{font-family:var(--serif);font-size:1.35rem;font-weight:500;letter-spacing:.18em}
+  .brand-text small{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{
+    text-decoration:none;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(244,239,230,.76);position:relative;padding:4px 0;transition:color .25s;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .3s;
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{width:100%}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    text-decoration:none;font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:14px 26px;border-radius:999px;cursor:pointer;border:1px solid transparent;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s,border-color .3s,box-shadow .3s;
+  }
+  .btn-gold{
+    background:var(--gold);color:#0a0908;
+    box-shadow:0 12px 32px -12px rgba(200,162,82,.55);
+  }
+  .btn-gold:hover{background:var(--gold-hi);transform:translateY(-2px);box-shadow:0 18px 36px -12px rgba(200,162,82,.7)}
+  .btn-ghost{
+    background:rgba(244,239,230,.04);color:var(--ink);border-color:rgba(244,239,230,.22);
+    backdrop-filter:blur(8px);
+  }
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-hi);transform:translateY(-2px)}
+
+  /* Nav CTA override so it never inherits link underline or muted color */
+  .nav-links a.btn-nav{
+    padding:10px 22px;background:var(--gold);color:#0a0908;font-weight:600;
+    border-radius:999px;letter-spacing:.13em;font-size:.72rem;
+  }
+  .nav-links a.btn-nav::after{display:none}
+  .nav-links a.btn-nav:hover{background:var(--gold-hi);color:#0a0908;transform:translateY(-1px)}
+
+  .menu-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .menu-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);margin:5px 0;transition:.3s}
+
+  /* ── HERO ────────────────────────────────────────── */
+  .hero{
+    position:relative;min-height:100svh;display:grid;align-items:end;
+    padding:128px 0 68px;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:-4% 0 -4% 0;z-index:0;overflow:hidden;
+  }
+  .hero-bg img{
+    width:100%;height:100%;object-fit:cover;object-position:center 46%;
+    filter:brightness(.82) contrast(1.06) saturate(1.04);
+    transform:scale(1.04);will-change:transform;
+  }
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(90deg,rgba(10,9,8,.88) 0%,rgba(10,9,8,.46) 48%,rgba(10,9,8,.16) 100%),
+      linear-gradient(180deg,rgba(10,9,8,.58) 0%,rgba(10,9,8,.08) 40%,rgba(10,9,8,.92) 100%);
+  }
+  .hero-grid{
+    position:relative;z-index:2;display:grid;
+    grid-template-columns:1.25fr .75fr;gap:48px;align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(3.2rem,6.8vw,6rem);margin:20px 0 22px;color:#faf6ee;
+  }
+  .hero .lead{font-size:1.05rem;color:rgba(244,239,230,.78);margin-bottom:34px;max-width:48ch}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .hero-meta{
+    margin-top:34px;padding-top:22px;border-top:1px solid rgba(244,239,230,.14);
+    display:flex;flex-wrap:wrap;gap:26px;font-size:.78rem;color:rgba(244,239,230,.7);
+  }
+  .hero-meta span{display:inline-flex;align-items:center;gap:8px}
+  .live-dot{
+    width:7px;height:7px;border-radius:50%;background:var(--gold);
+    box-shadow:0 0 0 0 rgba(200,162,82,.55);animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(200,162,82,0)}100%{box-shadow:0 0 0 0 rgba(200,162,82,0)}}
+
+  /* Hero editorial card */
+  .hero-card{
+    background:rgba(16,14,12,.76);backdrop-filter:blur(22px) saturate(140%);
+    border:1px solid rgba(200,162,82,.26);border-radius:16px;padding:28px;
+    box-shadow:0 32px 70px -24px rgba(0,0,0,.85);
+  }
+  .hc-top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid var(--line);
+  }
+  .hc-tag{
+    font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;
+  }
+  .hc-kanji{font-family:var(--serif);font-size:1.15rem;color:rgba(244,239,230,.45);letter-spacing:.1em}
+  .hero-card h3{font-size:1.65rem;color:#faf6ee;margin-bottom:10px}
+  .hero-card p{font-size:.84rem;color:var(--muted);line-height:1.65;margin-bottom:20px}
+  .hc-rows{display:grid;gap:10px;padding-top:16px;border-top:1px solid var(--line)}
+  .hc-row{display:flex;justify-content:space-between;align-items:baseline;font-size:.82rem}
+  .hc-row span{color:var(--muted)}
+  .hc-row strong{color:var(--ink);font-weight:500}
+  .hc-row strong.gold{color:var(--gold-hi);font-family:var(--serif);font-size:1.25rem;font-weight:500}
+
+  /* ── SECTIONS ───────────────────────────────────── */
+  section{padding:112px 0;position:relative}
+  .sec-head{max-width:680px;margin-bottom:58px}
+  .sec-head h2{margin:16px 0 18px}
+
+  /* Reveal choreography */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.2,.8,.2,1),transform .85s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+  /* ── PHILOSOPHY & COUNTERS ──────────────────────── */
+  .about{background:var(--bg-2);border-block:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center}
+  .about-copy p{color:var(--muted);margin-bottom:18px;font-size:.98rem}
+  .about-copy p strong{color:var(--ink);font-weight:500}
+  .chef-sign{
+    margin-top:30px;padding-top:22px;border-top:1px solid var(--line);
+    display:flex;align-items:center;gap:16px;
+  }
+  .chef-sign .seal{
+    width:42px;height:42px;border:1px solid var(--vermilion);color:#e25b47;
+    display:grid;place-items:center;font-family:var(--serif);font-size:1.1rem;border-radius:4px;
+  }
+  .chef-sign b{display:block;font-family:var(--serif);font-size:1.35rem;font-weight:500;color:var(--ink)}
+  .chef-sign span{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+  .stats-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  }
+  .stat-cell{background:var(--surface);padding:36px 28px;transition:background .3s}
+  .stat-cell:hover{background:var(--surface-2)}
+  .stat-num{font-family:var(--serif);font-size:3.2rem;line-height:1;color:var(--gold-hi);letter-spacing:-.02em}
+  .stat-num small{font-size:1.45rem;color:var(--gold)}
+  .stat-label{font-size:.78rem;color:var(--muted);margin-top:10px;line-height:1.5}
+
+  /* ── INTERACTIVE MENU (CARTA) ───────────────────── */
+  .carta-top{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:46px}
+  .carta-top .sec-head{margin-bottom:0}
+  .tabs{
+    display:inline-flex;gap:6px;padding:5px;border-radius:999px;
+    background:var(--surface);border:1px solid var(--line);
+  }
+  .tab-btn{
+    background:transparent;border:0;color:var(--muted);font-family:var(--sans);
+    font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+    padding:10px 20px;border-radius:999px;cursor:pointer;transition:all .28s;
+  }
+  .tab-btn:hover{color:var(--ink)}
+  .tab-btn.active{background:var(--gold);color:#0a0908;font-weight:600}
+
+  .menu-panel{display:none;animation:fadePanel .45s ease}
+  .menu-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  @keyframes fadePanel{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  .dish-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;
+    padding:26px 28px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,background .35s;
+  }
+  .dish-card:hover{transform:translateY(-4px);border-color:var(--line-strong);background:var(--surface-2)}
+  .dish-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+  .dish-head h3{font-size:1.55rem;color:#faf6ee}
+  .dish-price{font-family:var(--serif);font-size:1.55rem;color:var(--gold-hi);white-space:nowrap}
+  .dish-desc{font-size:.88rem;color:var(--muted);line-height:1.65}
+  .dish-meta{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:12px;border-top:1px solid rgba(244,239,230,.07);
+    font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);
+  }
+  .dish-badge{color:var(--gold);font-weight:500}
+
+  .omakase-banner{
+    grid-column:1 / -1;
+    background:linear-gradient(135deg,rgba(200,162,82,.12),rgba(184,58,40,.08) 65%,rgba(24,21,18,.95));
+    border:1px solid var(--line-strong);border-radius:18px;padding:34px 36px;
+    display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:center;
+  }
+  .omakase-banner h3{font-size:2.1rem;color:#faf6ee;margin:10px 0 12px}
+  .omakase-banner p{color:rgba(244,239,230,.78);font-size:.94rem}
+  .omakase-pricing{
+    text-align:right;border-left:1px solid rgba(200,162,82,.22);padding-left:32px;
+  }
+  .omakase-pricing .big{font-family:var(--serif);font-size:3rem;color:var(--gold-hi);line-height:1}
+  .omakase-pricing small{display:block;color:var(--muted);font-size:.78rem;margin-top:8px}
+
+  /* ── EDITORIAL GALLERY ──────────────────────────── */
+  .gallery{background:var(--bg-2);border-block:1px solid var(--line)}
+  .bento{
+    display:grid;grid-template-columns:1.35fr 1fr 1fr;grid-template-rows:290px 290px;gap:18px;
+  }
+  .bento-item{
+    position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);
+    background:var(--surface);
+  }
+  .bento-item.tall{grid-row:span 2}
+  .bento-item.wide{grid-column:span 2}
+  .bento-item img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .6s;
+  }
+  .bento-item:hover img{transform:scale(1.06)}
+  .bento-cap{
+    position:absolute;inset:auto 0 0;padding:22px 24px;
+    background:linear-gradient(180deg,transparent,rgba(10,9,8,.88) 78%);
+    display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+  }
+  .bento-cap b{display:block;font-family:var(--serif);font-size:1.35rem;font-weight:500;color:#faf6ee}
+  .bento-cap span{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+  /* ── PARALLAX QUOTE ─────────────────────────────── */
+  .quote-band{overflow:hidden;text-align:center;padding:124px 0}
+  .quote-watermark{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    font-family:var(--serif);font-size:20rem;color:rgba(200,162,82,.05);
+    pointer-events:none;user-select:none;line-height:1;will-change:transform;
+  }
+  .quote-band blockquote{
+    position:relative;z-index:2;font-family:var(--serif);
+    font-size:clamp(1.85rem,3.6vw,3rem);line-height:1.25;max-width:860px;margin-inline:auto;color:#faf6ee;
+  }
+  .quote-band cite{
+    position:relative;z-index:2;display:block;margin-top:26px;font-style:normal;
+    font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  }
+
+  /* ── REVIEWS ────────────────────────────────────── */
+  .reviews{background:var(--bg-2);border-top:1px solid var(--line)}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .review-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px 28px;
+    display:flex;flex-direction:column;justify-content:space-between;gap:22px;
+    transition:border-color .35s,transform .35s;
+  }
+  .review-card:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+  .stars{color:var(--gold);letter-spacing:.18em;font-size:.82rem}
+  .review-card p{font-size:.93rem;color:rgba(244,239,230,.86);line-height:1.7}
+  .reviewer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--line)}
+  .reviewer b{display:block;font-size:.86rem;color:var(--ink)}
+  .reviewer span{font-size:.73rem;color:var(--muted)}
+  .review-src{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+
+  /* ── RESERVATION & FOOTER ───────────────────────── */
+  .reserve-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:start}
+  .info-stack{display:grid;gap:22px;margin-top:34px}
+  .info-row{display:flex;gap:16px;align-items:flex-start}
+  .info-ico{
+    width:42px;height:42px;border-radius:11px;background:var(--surface);border:1px solid var(--line);
+    display:grid;place-items:center;flex:0 0 auto;color:var(--gold);
+  }
+  .info-row b{display:block;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+  .info-row span,.info-row a{font-size:.94rem;color:var(--ink);text-decoration:none}
+  .info-row a:hover{color:var(--gold-hi)}
+
+  .res-form{
+    background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:36px;
+    display:grid;gap:18px;
+  }
+  .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{display:grid;gap:7px}
+  .field label{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .field input,.field select,.field textarea{
+    font:inherit;font-size:.9rem;padding:13px 15px;border-radius:10px;
+    background:var(--bg-2);border:1px solid var(--line);color:var(--ink);outline:none;
+    transition:border-color .25s,box-shadow .25s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{
+    border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,162,82,.14);
+  }
+  .field textarea{resize:vertical;min-height:86px}
+  .form-feedback{
+    display:none;padding:14px 16px;border-radius:10px;
+    background:rgba(200,162,82,.12);border:1px solid var(--line-strong);
+    color:var(--gold-hi);font-size:.86rem;
+  }
+  .form-feedback.show{display:block}
+  .form-note{font-size:.72rem;color:var(--subtle);text-align:center}
+
+  footer{
+    background:#070605;border-top:1px solid var(--line);padding:58px 0 32px;
+  }
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:42px;padding-bottom:36px;border-bottom:1px solid var(--line)}
+  footer p{font-size:.84rem;color:var(--muted);max-width:34ch;margin-top:16px}
+  footer h4{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  footer ul{list-style:none;display:grid;gap:10px}
+  footer ul a{text-decoration:none;font-size:.85rem;color:var(--muted);transition:color .2s}
+  footer ul a:hover{color:var(--ink)}
+  .foot-bottom{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    padding-top:24px;font-size:.74rem;color:var(--subtle);
+  }
+
+  /* Responsive */
+  @media(max-width:980px){
+    .hero-grid,.about-grid,.reserve-grid,.omakase-banner{grid-template-columns:1fr}
+    .omakase-pricing{text-align:left;border-left:0;border-top:1px solid rgba(200,162,82,.22);padding:20px 0 0}
+    .menu-panel.active{grid-template-columns:1fr}
+    .bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+    .bento-item.tall{grid-row:span 1;aspect-ratio:4/3}
+    .bento-item.wide{grid-column:span 2;aspect-ratio:16/9}
+    .bento-item{aspect-ratio:4/3}
+    .review-grid{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .menu-toggle{display:block}
+    .nav-links.open{
+      display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;
+      background:rgba(10,9,8,.97);backdrop-filter:blur(18px);padding:18px 5vw 24px;gap:16px;
+      border-bottom:1px solid var(--line);align-items:flex-start;
+    }
+  }
+  @media(max-width:640px){
+    section{padding:76px 0}
+    .form-row-2,.stats-grid,.foot-grid,.bento{grid-template-columns:1fr}
+    .bento-item.wide{grid-column:span 1}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <span class="hanko" aria-hidden="true">黒</span>
+      <span class="brand-text">
+        <strong>KURO</strong>
+        <small>Omakase &amp; Robata · Madrid</small>
+      </span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+      <a href="#filosofia">La barra</a>
+      <a href="#carta">Nuestra carta</a>
+      <a href="#espacio">El espacio</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="#reservas" class="btn-nav">Reservar mesa</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="assets/kuro/kuro-hero.jpg" alt="Nigiri de atún rojo otoro sobre cerámica artesanal en barra de hinoki" data-parallax="0.14">
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Barrio de Salamanca · Madrid · 12 plazas</span>
+      <h1>Fuego lento,<br>corte <em>exacto</em>.</h1>
+      <p class="lead">Una barra de ciprés hinoki para doce comensales y una brasa viva de carbón blanco binchotan. Pescado salvaje madurado en cámara seca y cocina japonesa de temporada en dos pases cada noche.</p>
+      <div class="hero-actions">
+        <a href="#reservas" class="btn btn-gold">Reservar barra · 145 €</a>
+        <a href="#carta" class="btn btn-ghost">Explorar la carta</a>
+      </div>
+      <div class="hero-meta">
+        <span><i class="live-dot"></i> Pases nocturnos: 20:00 y 22:15</span>
+        <span>Calle de Jorge Juan 38</span>
+        <span>4,9 ★ · 214 reseñas</span>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <div class="hc-top">
+        <span class="hc-tag">Temporada de otoño</span>
+        <span class="hc-kanji">お任せ</span>
+      </div>
+      <h3>Menú Omakase Kuro</h3>
+      <p>Dieciséis pases preparados frente a ti en barra: dashi de otoño, seis nigiris de maduración larga, wagyu A5 al binchotan y postre de té hojicha.</p>
+      <div class="hc-rows">
+        <div class="hc-row"><span>Menú degustación (16 pases)</span><strong class="gold">145 €</strong></div>
+        <div class="hc-row"><span>Armonía de sakes &amp; borgoñas</span><strong>+ 85 €</strong></div>
+        <div class="hc-row"><span>Disponibilidad esta semana</span><strong>Jue · Vie · Sáb</strong></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- PHILOSOPHY & STATS -->
+<section class="about" id="filosofia">
+  <div class="wrap about-grid">
+    <div class="about-copy reveal">
+      <span class="eyebrow">La barra</span>
+      <h2 style="margin:16px 0 22px">Sin artificios. Solo <em>producto</em>, temperatura y silencio.</h2>
+      <p>KURO nace con una sola obsesión: reducir la distancia entre el fuego y el plato. Trabajamos directamente con lonjas de <strong>Burela, Barbate y Palamós</strong>, madurando cada pieza entre cuatro y veintiún días para afinar su textura.</p>
+      <p>El arroz se cuece cada noche con agua blanda y se aliña con vinagre rojo akazu envejecido tres años. No hay carta infinita ni mesas apretadas: solo doce taburetes alrededor del chef y un ritmo pausado de dos horas.</p>
+      <div class="chef-sign">
+        <div class="seal" aria-hidden="true">高</div>
+        <div>
+          <b>Kenji Takahashi</b>
+          <span>Chef propietario · 18 años entre Kioto y Madrid</span>
+        </div>
+      </div>
+    </div>
+    <div class="stats-grid reveal d2">
+      <div class="stat-cell">
+        <div class="stat-num"><span data-count="12">0</span></div>
+        <div class="stat-label">Plazas exclusivas en barra de madera hinoki</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-count="16">0</span></div>
+        <div class="stat-label">Pases en el menú Omakase de temporada</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-count="780">0</span><small>°C</small></div>
+        <div class="stat-label">Temperatura real de nuestra brasa binchotan</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">4,9<small> ★</small></div>
+        <div class="stat-label">Valoración media en 214 reseñas verificadas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE CARTA -->
+<section id="carta">
+  <div class="wrap">
+    <div class="carta-top">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Nuestra carta</span>
+        <h2>Temporada, brasa y <em>bodega</em>.</h2>
+        <p class="lead">El recorrido Omakase cambia cada semana según marea. En nuestra zona de mesas bajas también servimos robata y sake por copas.</p>
+      </div>
+      <div class="tabs reveal d1" role="tablist" aria-label="Categorías de la carta">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="omakase">Omakase</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="robata">Robata &amp; Nigiri</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="bodega">Sake &amp; Bodega</button>
+      </div>
+    </div>
+
+    <!-- Tab 1: Omakase -->
+    <div class="menu-panel active" id="panel-omakase" role="tabpanel">
+      <div class="omakase-banner reveal">
+        <div>
+          <span class="eyebrow">Experiencia principal en barra</span>
+          <h3>Menú Degustación Omakase · 16 pases</h3>
+          <p>Incluye cuatro otsumami de temporada, ocho nigiris de pescado salvaje madurado, pieza de Wagyu A5 al carbón binchotan, sopa akadashi, tamagoyaki de la casa y postre artesanal.</p>
+        </div>
+        <div class="omakase-pricing">
+          <div class="big">145 €</div>
+          <small>Por persona · IVA incluido<br>Maridaje opcional: +85 € (7 copas)</small>
+        </div>
+      </div>
+      <article class="dish-card reveal d1">
+        <div>
+          <div class="dish-head"><h3>Chawanmushi de erizo gallego</h3><span class="dish-price">Pase 02</span></div>
+          <p class="dish-desc">Flan salado de dashi de katsuobushi ahumado, yema tibia de erizo de las Rías Baixas y ralladura de yuzu fresco.</p>
+        </div>
+        <div class="dish-meta"><span>Otsumami</span><span class="dish-badge">Temporada</span></div>
+      </article>
+      <article class="dish-card reveal d2">
+        <div>
+          <div class="dish-head"><h3>Otoro de almadraba 14 días</h3><span class="dish-price">Pase 09</span></div>
+          <p class="dish-desc">Ventresca de atún rojo madurada dos semanas en cámara seca, ligeramente besada con binchotan y wasabi recién rallado de Shizuoka.</p>
+        </div>
+        <div class="dish-meta"><span>Nigiri · Arroz akazu</span><span class="dish-badge">Firma del chef</span></div>
+      </article>
+      <article class="dish-card reveal d3">
+        <div>
+          <div class="dish-head"><h3>Lubina salvaje &amp; ponzu blanco</h3><span class="dish-price">Pase 05</span></div>
+          <p class="dish-desc">Usukuri cortado a cuchillo yanagiba, piel crujiente al carbón, sal en escamas de Añana y aceite de cebollino.</p>
+        </div>
+        <div class="dish-meta"><span>Sashimi</span><span>Lonja de Burela</span></div>
+      </article>
+      <article class="dish-card reveal d4">
+        <div>
+          <div class="dish-head"><h3>Kagoshima Wagyu A5 en brasa</h3><span class="dish-price">Pase 13</span></div>
+          <p class="dish-desc">Lomo bajo sellado sobre carbón blanco Kishu, acompañado de berenjena japonesa laqueada en miso dulce y pimienta sansho.</p>
+        </div>
+        <div class="dish-meta"><span>Robata 780 °C</span><span class="dish-badge">Certificado A5</span></div>
+      </article>
+    </div>
+
+    <!-- Tab 2: Robata & Nigiri -->
+    <div class="menu-panel" id="panel-robata" role="tabpanel">
+      <article class="dish-card">
+        <div>
+          <div class="dish-head"><h3>Brocheta de Wagyu A5 &amp; tare</h3><span class="dish-price">38 €</span></div>
+          <p class="dish-desc">Corte de Kagoshima asado al momento sobre brasa viva de encina japonesa con glaseado reducido 48 horas.</p>
+        </div>
+        <div class="dish-meta"><span>Parrilla Robata</span><span class="dish-badge">Recomendado</span></div>
+      </article>
+      <article class="dish-card">
+        <div>
+          <div class="dish-head"><h3>Selección de 6 nigiris del chef</h3><span class="dish-price">54 €</span></div>
+          <p class="dish-desc">Pescado del día madurado en casa: chutoro, hamachi, gamba roja de Palamós, vieira al soplete, caballa curada y anguila kabayaki.</p>
+        </div>
+        <div class="dish-meta"><span>Barra de sushi</span><span>Arroz akazu</span></div>
+      </article>
+      <article class="dish-card">
+        <div>
+          <div class="dish-head"><h3>Bacalao negro al miso saikyo</h3><span class="dish-price">34 €</span></div>
+          <p class="dish-desc">Marinado 72 horas en miso blanco de Kioto, caramelizado al binchotan con brotes de jengibre encurtido.</p>
+        </div>
+        <div class="dish-meta"><span>Parrilla Robata</span><span>Clásico Kuro</span></div>
+      </article>
+      <article class="dish-card">
+        <div>
+          <div class="dish-head"><h3>Tataki de bonito ahumado en paja</h3><span class="dish-price">26 €</span></div>
+          <p class="dish-desc">Sellado en llama viva de paja de arroz (warayaki), servido con ajo asado, cebolla morada y ponzu casero.</p>
+        </div>
+        <div class="dish-meta"><span>Entrada fría</span><span>Temporada</span></div>
+      </article>
+    </div>
+
+    <!-- Tab 3: Sake & Bodega -->
+    <div class="menu-panel" id="panel-bodega" role="tabpanel">
+      <article class="dish-card">
+        <div>
+          <div class="dish-head"><h3>Armonía Omakase · 7 copas</h3><span class="dish-price">85 €</span></div>
+          <p class="dish-desc">Selección de nuestra sumiller Sofía Roldán combinando sakes artesanales Junmai Daiginjo, champagnes de productor y blancos minerales.</p>
+        </div>
+        <div class="dish-meta"><span>Maridaje completo</span><span class="dish-badge">Sumiller</span></div>
+      </article>
+      <article class="dish-card">
+        <div>
+          <div class="dish-head"><h3>Dassai 23 · Junmai Daiginjo</h3><span class="dish-price">24 €</span></div>
+          <p class="dish-desc">Arroz Yamada Nishiki pulido al 23 %. Notas de melocotón blanco, flor de peral y final sedoso. Servicio en copa de cristal fino.</p>
+        </div>
+        <div class="dish-meta"><span>Yamaguchi, Japón</span><span>Copa 90 ml</span></div>
+      </article>
+      <article class="dish-card">
+        <div>
+          <div class="dish-head"><h3>Vuelo de 3 sakes artesanales</h3><span class="dish-price">36 €</span></div>
+          <p class="dish-desc">Recorrido guiado desde un Junmai seco y salino hasta un Kimoto envejecido en barrica de cedro, servido a tres temperaturas.</p>
+        </div>
+        <div class="dish-meta"><span>Degustación</span><span>3 × 60 ml</span></div>
+      </article>
+      <article class="dish-card">
+        <div>
+          <div class="dish-head"><h3>Té Gyokuro frío &amp; infusiones</h3><span class="dish-price">18 €</span></div>
+          <p class="dish-desc">Maridaje sin alcohol elaborado en frío durante 14 horas: Gyokuro de Uji, hojicha tostado y kombuchas botánicas de yuzu.</p>
+        </div>
+        <div class="dish-meta"><span>Sin alcohol</span><span>4 servicios</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="espacio">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">El espacio y el oficio</span>
+      <h2>Madera quemada, luz baja y <em>precisión</em>.</h2>
+      <p class="lead">Diseñado en piedra volcánica, cedro yakisugi y ciprés japonés sin barniz. Cada rincón dirige la mirada hacia el gesto del cuchillo y el resplandor de la brasa.</p>
+    </div>
+    <div class="bento">
+      <figure class="bento-item tall reveal">
+        <img src="assets/kuro/kuro-interior.jpg" alt="Interior minimalista de la barra de madera hinoki en KURO Madrid" loading="lazy">
+        <figcaption class="bento-cap">
+          <div><span>Arquitectura</span><b>Barra Hinoki · 12 plazas</b></div>
+        </figcaption>
+      </figure>
+      <figure class="bento-item reveal d1">
+        <img src="assets/kuro/kuro-omakase.jpg" alt="Selección omakase de sashimi y nigiri sobre pizarra negra" loading="lazy">
+        <figcaption class="bento-cap">
+          <div><span>Maduración</span><b>Pescado de lonja</b></div>
+        </figcaption>
+      </figure>
+      <figure class="bento-item reveal d2">
+        <img src="assets/kuro/kuro-robata.jpg" alt="Parrilla japonesa robata con carbón binchotan y wagyu A5" loading="lazy">
+        <figcaption class="bento-cap">
+          <div><span>Fuego vivo</span><b>Brasa Binchotan</b></div>
+        </figcaption>
+      </figure>
+      <figure class="bento-item wide reveal d3">
+        <img src="assets/kuro/kuro-hero.jpg" alt="Detalle de nigiri de atún otoro sobre plato de gres oscuro" loading="lazy">
+        <figcaption class="bento-cap">
+          <div><span>Ritual nocturno</span><b>Dos pases cada noche: 20:00 y 22:15</b></div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-band">
+  <div class="quote-watermark" data-parallax="-0.06" aria-hidden="true">黒</div>
+  <div class="wrap">
+    <blockquote class="reveal">«El buen omakase no intenta sorprenderte con diez ingredientes en el mismo bocado: busca el segundo exacto en el que <em>un solo pescado</em> alcanza su plenitud.»</blockquote>
+    <cite class="reveal d2">Chef Kenji Takahashi · KURO Madrid</cite>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="resenas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Reseñas</span>
+      <h2>Lo que dicen quienes se han sentado en la <em>barra</em>.</h2>
+    </div>
+    <div class="review-grid">
+      <article class="review-card reveal">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <p>«El mejor equilibrio entre técnica japonesa y producto español que he probado en Madrid. El pase de otoro madurado y el chawanmushi de erizo son inolvidables. La atención en sala es impecable sin resultar rígida.»</p>
+        <div class="reviewer">
+          <div><b>Alejandro M.</b><span>Menú Omakase + Maridaje</span></div>
+          <span class="review-src">Google · 5/5</span>
+        </div>
+      </article>
+      <article class="review-card reveal d1">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <p>«Cenamos en el segundo pase del viernes. Ver trabajar a Kenji a un metro de distancia, con el sonido suave de la brasa binchotan y la selección de sakes que explica Sofía, convierte la cena en un ritual.»</p>
+        <div class="reviewer">
+          <div><b>Clara &amp; Martín R.</b><span>Pase de las 22:15</span></div>
+          <span class="review-src">Google · 5/5</span>
+        </div>
+      </article>
+      <article class="review-card reveal d2">
+        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <p>«Fuimos sin alcohol y el maridaje de tés japoneses infusionados en frío nos voló la cabeza. Doce plazas se notan: todo llega a la temperatura perfecta y al ritmo exacto.»</p>
+        <div class="reviewer">
+          <div><b>Lucía V.</b><span>Menú Omakase</span></div>
+          <span class="review-src">Google · 5/5</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATIONS -->
+<section id="reservas">
+  <div class="wrap reserve-grid">
+    <div class="reveal">
+      <span class="eyebrow">Reservas</span>
+      <h2 style="margin:16px 0 18px">Asegura tu plaza en la <em>barra</em>.</h2>
+      <p class="lead">Abrimos reservas el día 1 de cada mes para el mes siguiente. Si tienes alergias o restricciones alimentarias, indícalo al reservar para adaptar el menú con 48 horas de antelación.</p>
+      <div class="info-stack">
+        <div class="info-row">
+          <div class="info-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.2 7-11.5a7 7 0 1 0-14 0C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          </div>
+          <div><b>Dirección</b><span>Calle de Jorge Juan 38 · 28001 Madrid</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <div><b>Horario de pases</b><span>Miércoles a domingo · Pases a las 20:00 y 22:15</span></div>
+        </div>
+        <div class="info-row">
+          <div class="info-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L9 10.6a16 16 0 0 0 4.4 4.4l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"/></svg>
+          </div>
+          <div><b>Teléfono de sala</b><a href="tel:+34910000000">+34 910 000 000</a></div>
+        </div>
+        <div class="info-row">
+          <div class="info-ico" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          </div>
+          <div><b>Reservas privadas</b><a href="mailto:reservas@kuro-omakase.es">reservas@kuro-omakase.es</a></div>
+        </div>
+      </div>
+    </div>
+
+    <form class="res-form reveal d2" id="reserveForm">
+      <div class="form-row-2">
+        <div class="field">
+          <label for="res-name">Nombre completo</label>
+          <input id="res-name" name="name" required placeholder="Tu nombre">
+        </div>
+        <div class="field">
+          <label for="res-phone">Teléfono</label>
+          <input id="res-phone" name="phone" type="tel" required placeholder="600 000 000">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="field">
+          <label for="res-date">Fecha deseada</label>
+          <input id="res-date" name="date" type="date" required>
+        </div>
+        <div class="field">
+          <label for="res-shift">Pase</label>
+          <select id="res-shift" name="shift">
+            <option>Primer pase · 20:00</option>
+            <option>Segundo pase · 22:15</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="field">
+          <label for="res-guests">Comensales</label>
+          <select id="res-guests" name="guests">
+            <option>2 personas · Barra Hinoki</option>
+            <option>1 persona · Barra Hinoki</option>
+            <option>3 personas · Barra Hinoki</option>
+            <option>4 personas · Mesa baja Robata</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="res-menu">Experiencia</label>
+          <select id="res-menu" name="menu">
+            <option>Menú Omakase (145 €)</option>
+            <option>Omakase + Maridaje Sake (230 €)</option>
+            <option>Omakase + Maridaje Tés (163 €)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="res-notes">Alergias o notas para cocina (opcional)</label>
+        <textarea id="res-notes" name="notes" placeholder="Indícanos intolerancias, ocasión especial o preferencia de barra"></textarea>
+      </div>
+      <button type="submit" class="btn btn-gold" style="width:100%">Solicitar reserva</button>
+      <div class="form-feedback" id="formFeedback" role="status" aria-live="polite"></div>
+      <p class="form-note">Sin cargo por cancelación hasta 24 h antes del pase. Confirmación inmediata por WhatsApp y correo.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand">
+          <span class="hanko" aria-hidden="true">黒</span>
+          <span class="brand-text"><strong>KURO</strong><small>Omakase &amp; Robata · Madrid</small></span>
+        </a>
+        <p>Alta cocina japonesa en barra de ciprés hinoki y brasa binchotan en el corazón del Barrio de Salamanca.</p>
+      </div>
+      <div>
+        <h4>Recorrido</h4>
+        <ul>
+          <li><a href="#filosofia">Filosofía &amp; Chef</a></li>
+          <li><a href="#carta">Menú Omakase &amp; Carta</a></li>
+          <li><a href="#espacio">El espacio</a></li>
+          <li><a href="#reservas">Política de reservas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="#reservas">Calle de Jorge Juan 38, Madrid</a></li>
+          <li><a href="tel:+34910000000">+34 910 000 000</a></li>
+          <li><a href="mailto:reservas@kuro-omakase.es">reservas@kuro-omakase.es</a></li>
+          <li><a href="#top">Instagram · @kuro.madrid</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 KURO Omakase &amp; Robata · Marca ficticia de demostración</span>
+      <span>Generado con la skill <code>kit-web-scrolling</code> · Claude Skill Factory ES</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Sticky nav + progress bar */
+  const nav = document.getElementById('nav');
+  const progressBar = document.getElementById('progressBar');
+  const onScrollUI = () => {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 28);
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll > 0) progressBar.style.width = ((y / maxScroll) * 100).toFixed(2) + '%';
+  };
+  onScrollUI();
+
+  /* Mobile menu */
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* Interactive menu tabs */
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.menu-panel');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const target = document.getElementById('panel-' + btn.dataset.tab);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  /* Reservation form interactive confirmation */
+  const form = document.getElementById('reserveForm');
+  const feedback = document.getElementById('formFeedback');
+  const dateInput = document.getElementById('res-date');
+  if (dateInput && !dateInput.value) {
+    const next = new Date();
+    next.setDate(next.getDate() + 3);
+    dateInput.value = next.toISOString().split('T')[0];
+  }
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim() || 'invitado';
+    const shift = form.shift.value;
+    const guests = form.guests.value;
+    feedback.textContent = `Gracias, ${name}. Hemos pre-reservado ${guests} (${shift}). Te enviaremos la confirmación definitiva en menos de 15 minutos.`;
+    feedback.classList.add('show');
+    form.reset();
+  });
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    document.querySelectorAll('[data-count]').forEach(el => el.textContent = el.dataset.count);
+    window.addEventListener('scroll', onScrollUI, { passive: true });
+    return;
+  }
+
+  /* Reveal on scroll */
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+  /* Counters */
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const dur = 1400;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased).toLocaleString('es-ES');
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCount(e.target); countIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+
+  /* Parallax + scroll UI in single rAF loop */
+  const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
+  let ticking = false;
+  const update = () => {
+    const y = window.scrollY;
+    onScrollUI();
+    parallaxEls.forEach(el => {
+      const speed = parseFloat(el.dataset.parallax);
+      el.style.transform = el.tagName === 'IMG'
+        ? `scale(1.06) translate3d(0, ${y * speed}px, 0)`
+        : `translate(-50%, calc(-50% + ${y * speed}px))`;
+    });
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

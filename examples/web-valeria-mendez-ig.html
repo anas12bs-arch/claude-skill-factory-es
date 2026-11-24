@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valeria Méndez (@valeriamendez.design) · Directora Creativa &amp; Branding en Barcelona</title>
+<meta name="description" content="Web de marca personal generada desde Instagram (@valeriamendez.design). Dirección creativa, identidad visual y packaging editorial en Barcelona.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f8f5ef;
+    --bg-2:#f0ebe1;
+    --card:#ffffff;
+    --ink:#171513;
+    --muted:#676057;
+    --subtle:#928a7f;
+    --accent:#be5234;
+    --accent-dark:#9e3f25;
+    --accent-soft:#f6e4dd;
+    --gold:#c59b52;
+    --line:rgba(23,21,19,.11);
+    --serif:"Instrument Serif",Georgia,serif;
+    --sans:"Plus Jakarta Sans",system-ui,sans-serif;
+    --mono:"JetBrains Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);font-family:var(--sans);
+    line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  ::selection{background:var(--accent-soft);color:var(--accent-dark)}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+
+  ::-webkit-scrollbar{width:9px}
+  ::-webkit-scrollbar-track{background:var(--bg-2)}
+  ::-webkit-scrollbar-thumb{background:#cfc6b8;border-radius:99px;border:2px solid var(--bg-2)}
+  ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+  .wrap{width:min(1200px,90vw);margin-inline:auto}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);
+    font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent)}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;line-height:1.02}
+  h2{font-size:clamp(2.4rem,4.8vw,3.9rem)}
+  h1 em,h2 em{font-style:italic;color:var(--accent)}
+  .lead{color:var(--muted);font-size:1.02rem;line-height:1.72;max-width:52ch}
+
+  /* ── NAV ─────────────────────────────────────────── */
+  header.nav{
+    position:fixed;inset:0 0 auto;z-index:110;padding:18px 0;
+    transition:background .35s,padding .35s,border-color .35s;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.scrolled{
+    background:rgba(248,245,239,.86);backdrop-filter:blur(16px) saturate(150%);
+    padding:12px 0;border-bottom-color:var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+  .brand-dot{
+    width:32px;height:32px;border-radius:50%;overflow:hidden;
+    border:1.5px solid var(--accent);flex:0 0 auto;
+  }
+  .brand-dot img{width:100%;height:100%;object-fit:cover}
+  .brand-name{display:flex;flex-direction:column;line-height:1.08}
+  .brand-name strong{font-family:var(--serif);font-size:1.35rem;font-weight:400}
+  .brand-name small{font-family:var(--mono);font-size:.64rem;color:var(--muted)}
+
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links a{
+    text-decoration:none;font-size:.82rem;font-weight:500;color:var(--muted);
+    transition:color .2s;position:relative;padding:4px 0;
+  }
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.nav-cta{
+    background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;font-size:.78rem;font-weight:600;
+    transition:background .25s,transform .25s;
+  }
+  .nav-links a.nav-cta:hover{background:var(--accent);color:#fff;transform:translateY(-1px)}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    text-decoration:none;font-size:.84rem;font-weight:600;padding:13px 24px;
+    border-radius:999px;cursor:pointer;border:1px solid transparent;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),background .25s,border-color .25s,box-shadow .25s;
+  }
+  .btn-primary{background:var(--ink);color:#fff;box-shadow:0 14px 28px -14px rgba(23,21,19,.55)}
+  .btn-primary:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 16px 32px -14px rgba(190,82,52,.6)}
+  .btn-outline{background:transparent;color:var(--ink);border-color:rgba(23,21,19,.22)}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);background:#fff;transform:translateY(-2px)}
+
+  .menu-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .menu-toggle span{display:block;width:22px;height:1.5px;background:var(--ink);margin:5px 0}
+
+  /* ── HERO WITH ELEVATED IG PROFILE CARD ─────────── */
+  .hero{
+    position:relative;min-height:100svh;display:grid;align-items:center;
+    padding:112px 0 68px;overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute;width:620px;height:620px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(190,82,52,.11) 0%,rgba(197,155,82,.08) 42%,transparent 70%);
+    top:-140px;right:-120px;filter:blur(30px);will-change:transform;
+  }
+  .hero-grid{
+    position:relative;z-index:2;display:grid;
+    grid-template-columns:1.08fr .92fr;gap:54px;align-items:center;
+  }
+  .hero h1{font-size:clamp(3rem,5.4vw,4.9rem);margin:18px 0 20px}
+  .hero .lead{margin-bottom:28px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
+
+  /* Total community bar across platforms */
+  .community-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+    padding:16px 18px;background:rgba(255,255,255,.78);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:16px;
+  }
+  .comm-item{padding-right:10px;border-right:1px solid var(--line)}
+  .comm-item:last-child{border-right:0;padding-right:0}
+  .comm-item b{display:block;font-family:var(--serif);font-size:1.55rem;line-height:1;color:var(--ink)}
+  .comm-item span{font-family:var(--mono);font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .comm-total{
+    display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+    font-size:.78rem;color:var(--muted);
+  }
+  .comm-total strong{color:var(--ink)}
+  .comm-dot{width:7px;height:7px;border-radius:50%;background:#2b9e5c}
+
+  /* Elevated Instagram Profile Card */
+  .ig-card{
+    background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;
+    box-shadow:0 36px 80px -36px rgba(23,21,19,.24),0 4px 18px -6px rgba(23,21,19,.06);
+    position:relative;
+  }
+  .ig-gold-bar{
+    height:3px;width:100%;
+    background:linear-gradient(90deg,var(--gold),var(--accent),#d97a54,var(--gold));
+  }
+  .ig-body{padding:24px 24px 20px}
+  .ig-head{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+
+  /* Rotating IG Story Ring */
+  .story-ring{
+    position:relative;width:82px;height:82px;border-radius:50%;padding:3px;flex:0 0 auto;
+    display:grid;place-items:center;
+  }
+  .story-ring::before{
+    content:"";position:absolute;inset:0;border-radius:50%;
+    background:conic-gradient(from 0deg,#f58529,#dd2a7b,#8134af,#be5234,#f58529);
+    animation:spinRing 9s linear infinite;
+  }
+  @keyframes spinRing{to{transform:rotate(360deg)}}
+  .story-ring-inner{
+    position:relative;z-index:1;width:100%;height:100%;border-radius:50%;
+    background:#fff;padding:2.5px;overflow:hidden;
+  }
+  .story-ring-inner img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+
+  .ig-stats-wrap{flex:1}
+  .ig-name-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .ig-name-row strong{font-size:1.05rem;font-weight:700;color:var(--ink)}
+  .verified-badge{
+    width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;
+    background:linear-gradient(135deg,#3897f0,#1877f2);
+    box-shadow:0 3px 10px -2px rgba(24,119,242,.55);flex:0 0 auto;
+  }
+  .ig-handle{
+    display:inline-block;font-family:var(--mono);font-size:.74rem;color:var(--accent);
+    text-decoration:none;margin-top:2px;
+  }
+  .ig-handle:hover{text-decoration:underline}
+
+  /* Instant visible stats */
+  .ig-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+    margin-top:12px;padding-top:12px;border-top:1px solid var(--line);
+  }
+  .ig-stat b{display:block;font-size:.96rem;font-weight:700;color:var(--ink);line-height:1.1}
+  .ig-stat span{font-size:.69rem;color:var(--muted)}
+
+  .ig-cat{
+    display:inline-block;font-size:.7rem;font-weight:600;color:var(--accent-dark);
+    background:var(--accent-soft);padding:3px 10px;border-radius:999px;margin-bottom:8px;
+  }
+  .ig-bio{font-size:.83rem;color:var(--ink);line-height:1.55;margin-bottom:16px}
+  .ig-bio span{color:var(--muted)}
+
+  .ig-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:18px}
+  .ig-btn{
+    text-align:center;text-decoration:none;font-size:.75rem;font-weight:600;
+    padding:9px 10px;border-radius:10px;transition:all .2s;
+  }
+  .ig-btn.solid{background:var(--ink);color:#fff}
+  .ig-btn.solid:hover{background:var(--accent)}
+  .ig-btn.soft{background:var(--bg-2);color:var(--ink)}
+  .ig-btn.soft:hover{background:var(--accent-soft);color:var(--accent-dark)}
+
+  /* 6-photo mini grid inside IG card */
+  .ig-mini-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:4px;
+    background:#fff;padding:0 4px 4px;
+  }
+  .ig-tile{
+    aspect-ratio:1/1;overflow:hidden;position:relative;border-radius:8px;cursor:pointer;
+  }
+  .ig-tile img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+  .ig-tile:hover img{transform:scale(1.08)}
+  .ig-tile::after{
+    content:"↗";position:absolute;inset:auto 8px 6px auto;font-size:.75rem;color:#fff;
+    background:rgba(23,21,19,.55);width:22px;height:22px;border-radius:50%;
+    display:grid;place-items:center;opacity:0;transition:opacity .25s;
+  }
+  .ig-tile:hover::after{opacity:1}
+
+  /* ── SECTIONS ───────────────────────────────────── */
+  section{padding:106px 0;position:relative}
+  .sec-head{max-width:680px;margin-bottom:52px}
+  .sec-head h2{margin:14px 0 16px}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+  /* ── ABOUT ──────────────────────────────────────── */
+  .about{background:var(--bg-2);border-block:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+  .portrait-frame{
+    position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;
+    box-shadow:0 32px 64px -32px rgba(23,21,19,.32);
+  }
+  .portrait-frame img{width:100%;height:100%;object-fit:cover}
+  .portrait-tag{
+    position:absolute;left:18px;bottom:18px;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+    padding:10px 15px;border-radius:12px;font-size:.76rem;color:var(--ink);
+    box-shadow:0 12px 26px -12px rgba(0,0,0,.25);
+  }
+  .portrait-tag b{display:block;font-weight:700}
+  .portrait-tag span{font-family:var(--mono);font-size:.66rem;color:var(--accent)}
+
+  .about-copy p{color:var(--muted);margin-bottom:18px;font-size:.98rem}
+  .about-copy p strong{color:var(--ink);font-weight:600}
+  .pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+  .pill{
+    font-family:var(--mono);font-size:.72rem;padding:8px 14px;border-radius:999px;
+    background:#fff;border:1px solid var(--line);color:var(--ink);
+  }
+
+  /* ── SERVICES ───────────────────────────────────── */
+  .srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .srv-card{
+    background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 28px;
+    display:flex;flex-direction:column;justify-content:space-between;gap:22px;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s;
+  }
+  .srv-card:hover{transform:translateY(-6px);box-shadow:0 28px 54px -32px rgba(23,21,19,.24);border-color:rgba(190,82,52,.35)}
+  .srv-card.featured{background:var(--ink);color:#f8f5ef;border-color:var(--ink)}
+  .srv-card.featured p,.srv-card.featured li{color:rgba(248,245,239,.74)}
+  .srv-card.featured .srv-price{color:#f3c68f}
+  .srv-card.featured .srv-tag{background:rgba(197,155,82,.18);color:#f3c68f}
+  .srv-tag{
+    display:inline-block;font-family:var(--mono);font-size:.66rem;text-transform:uppercase;
+    letter-spacing:.12em;padding:5px 11px;border-radius:999px;
+    background:var(--accent-soft);color:var(--accent-dark);width:fit-content;margin-bottom:14px;
+  }
+  .srv-card h3{font-size:1.8rem;margin-bottom:10px}
+  .srv-card p{font-size:.9rem;color:var(--muted);margin-bottom:16px}
+  .srv-list{list-style:none;display:grid;gap:8px;font-size:.84rem;color:var(--muted)}
+  .srv-list li::before{content:"→ ";color:var(--accent);font-weight:700}
+  .srv-card.featured .srv-list li::before{color:#f3c68f}
+  .srv-foot{padding-top:18px;border-top:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between}
+  .srv-card.featured .srv-foot{border-top-color:rgba(248,245,239,.14)}
+  .srv-price{font-family:var(--serif);font-size:2rem;color:var(--ink)}
+  .srv-price small{font-family:var(--sans);font-size:.74rem;color:var(--muted)}
+  .srv-card.featured .srv-price small{color:rgba(248,245,239,.6)}
+
+  /* ── INTERACTIVE PORTFOLIO GALLERY ──────────────── */
+  .portfolio{background:var(--bg-2);border-top:1px solid var(--line)}
+  .port-top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+  .port-top .sec-head{margin-bottom:0}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .filter-btn{
+    background:#fff;border:1px solid var(--line);color:var(--muted);
+    font-family:var(--mono);font-size:.72rem;padding:9px 16px;border-radius:999px;cursor:pointer;
+    transition:all .2s;
+  }
+  .filter-btn:hover{border-color:var(--ink);color:var(--ink)}
+  .filter-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  .port-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .work-card{
+    background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+  }
+  .work-card:hover{transform:translateY(-6px);box-shadow:0 26px 48px -28px rgba(23,21,19,.24)}
+  .work-card.hidden{display:none}
+  .work-img{aspect-ratio:4/5;overflow:hidden;position:relative}
+  .work-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .work-card:hover .work-img img{transform:scale(1.06)}
+  .work-meta{padding:16px 18px}
+  .work-meta span{font-family:var(--mono);font-size:.66rem;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+  .work-meta h3{font-size:1.35rem;margin-top:4px;color:var(--ink)}
+  .work-meta p{font-size:.78rem;color:var(--muted);margin-top:4px}
+
+  /* ── IMPACT METRICS DARK BAND ───────────────────── */
+  .metrics-band{background:var(--ink);color:#f8f5ef;padding:82px 0}
+  .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .metric{padding-left:22px;border-left:1px solid rgba(248,245,239,.16)}
+  .metric .n{font-family:var(--serif);font-size:3.5rem;line-height:1;color:#f3c68f}
+  .metric .t{font-size:.84rem;color:rgba(248,245,239,.72);margin-top:8px}
+
+  /* ── TESTIMONIALS ───────────────────────────────── */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .testi{
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 26px;
+    display:flex;flex-direction:column;justify-content:space-between;gap:20px;
+  }
+  .testi-res{
+    display:inline-block;font-family:var(--mono);font-size:.7rem;color:var(--accent-dark);
+    background:var(--accent-soft);padding:5px 11px;border-radius:8px;width:fit-content;
+  }
+  .testi p{font-size:.92rem;color:var(--ink);line-height:1.68}
+  .testi .who b{display:block;font-size:.86rem;color:var(--ink)}
+  .testi .who span{font-size:.74rem;color:var(--muted)}
+
+  /* ── CONTACT & FOOTER ───────────────────────────── */
+  .contact{background:var(--bg-2);border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:start}
+  .social-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+  .soc-card{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px;
+    text-decoration:none;transition:border-color .25s,transform .25s;
+  }
+  .soc-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .soc-card b{display:block;font-size:.84rem;color:var(--ink)}
+  .soc-card span{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+
+  form.contact-form{
+    background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px;display:grid;gap:16px;
+  }
+  .field{display:grid;gap:6px}
+  .field label{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+  .field input,.field select,.field textarea{
+    font:inherit;font-size:.9rem;padding:12px 14px;border-radius:10px;
+    background:var(--bg);border:1px solid var(--line);color:var(--ink);outline:none;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(190,82,52,.12)}
+  .field textarea{resize:vertical;min-height:92px}
+  .feedback{
+    display:none;padding:13px 15px;border-radius:10px;
+    background:var(--accent-soft);color:var(--accent-dark);font-size:.85rem;font-weight:500;
+  }
+  .feedback.show{display:block}
+
+  footer{background:var(--ink);color:rgba(248,245,239,.72);padding:46px 0 28px}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;padding-bottom:24px;border-bottom:1px solid rgba(248,245,239,.12)}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;padding-top:20px;font-size:.74rem;color:rgba(248,245,239,.5)}
+
+  /* Lightbox modal */
+  .lightbox{
+    position:fixed;inset:0;z-index:200;background:rgba(16,14,12,.86);backdrop-filter:blur(10px);
+    display:none;place-items:center;padding:24px;
+  }
+  .lightbox.open{display:grid}
+  .lb-box{
+    background:#fff;border-radius:20px;max-width:780px;width:100%;overflow:hidden;
+    display:grid;grid-template-columns:1.1fr .9fr;box-shadow:0 40px 90px rgba(0,0,0,.5);
+  }
+  .lb-box img{width:100%;height:100%;object-fit:cover;max-height:520px}
+  .lb-info{padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+  .lb-close{
+    align-self:flex-end;background:var(--bg-2);border:0;width:34px;height:34px;border-radius:50%;
+    cursor:pointer;font-size:1rem;color:var(--ink);
+  }
+
+  @media(max-width:980px){
+    .hero-grid,.about-grid,.contact-grid,.lb-box{grid-template-columns:1fr}
+    .srv-grid,.testi-grid{grid-template-columns:1fr}
+    .port-grid,.metrics-grid{grid-template-columns:1fr 1fr}
+    .community-strip{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+    .menu-toggle{display:block}
+    .nav-links.open{
+      display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;
+      background:rgba(248,245,239,.98);backdrop-filter:blur(14px);padding:16px 5vw 22px;gap:14px;
+      border-bottom:1px solid var(--line);
+    }
+  }
+  @media(max-width:640px){
+    section{padding:76px 0}
+    .port-grid,.metrics-grid,.social-links{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-dot"><img src="assets/valeria/valeria-portrait.jpg" alt="Valeria Méndez"></span>
+      <span class="brand-name">
+        <strong>Valeria Méndez</strong>
+        <small>@valeriamendez.design</small>
+      </span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#portfolio">Portfolio IG</a>
+      <a href="#testimonios">Resultados</a>
+      <a href="#contacto" class="nav-cta">Trabajemos juntas</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO WITH INSTAGRAM PROFILE CARD -->
+<section class="hero" id="top">
+  <div class="hero-glow" data-parallax="0.1"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Directora creativa · Barcelona</span>
+      <h1>Identidades que<br>se <em>sienten</em>, no solo<br>se ven.</h1>
+      <p class="lead">Ayudo a marcas independientes de cosmética, hospitalidad y cultura a pasar de un perfil más en Instagram a un universo visual con criterio, precio premium y personalidad propia.</p>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn btn-primary">Reservar sesión de marca</a>
+        <a href="#portfolio" class="btn btn-outline">Ver proyectos seleccionados</a>
+      </div>
+
+      <div class="community-strip">
+        <div class="comm-item"><b>84,2K</b><span>Instagram</span></div>
+        <div class="comm-item"><b>31,5K</b><span>YouTube</span></div>
+        <div class="comm-item"><b>18,4K</b><span>LinkedIn</span></div>
+        <div class="comm-item"><b>8,2K</b><span>Newsletter</span></div>
+      </div>
+      <div class="comm-total">
+        <span class="comm-dot"></span>
+        <span>Comunidad total verificada: <strong>142.300 personas</strong> · Agenda abierta Q1 2027</span>
+      </div>
+    </div>
+
+    <!-- Elevated Instagram Profile Card -->
+    <aside class="ig-card" aria-label="Tarjeta de perfil de Instagram">
+      <div class="ig-gold-bar"></div>
+      <div class="ig-body">
+        <div class="ig-head">
+          <div class="story-ring">
+            <div class="story-ring-inner">
+              <img src="assets/valeria/valeria-portrait.jpg" alt="Foto de perfil de Valeria Méndez">
+            </div>
+          </div>
+          <div class="ig-stats-wrap">
+            <div class="ig-name-row">
+              <strong>Valeria Méndez</strong>
+              <span class="verified-badge" title="Perfil verificado" aria-label="Verificado">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <a href="#contacto" class="ig-handle">@valeriamendez.design</a>
+            <div class="ig-stats">
+              <div class="ig-stat"><b>318</b><span>publicaciones</span></div>
+              <div class="ig-stat"><b>84,2K</b><span>seguidores</span></div>
+              <div class="ig-stat"><b>412</b><span>seguidos</span></div>
+            </div>
+          </div>
+        </div>
+
+        <span class="ig-cat">Dirección Creativa &amp; Branding · Barcelona</span>
+        <p class="ig-bio">
+          Diseño marcas mediterráneas que cobran lo que valen.<br>
+          <span>Identidad visual · Packaging · Dirección de arte</span><br>
+          <span>48 marcas lanzadas · Mentoría para diseñadores ↓</span>
+        </p>
+
+        <div class="ig-actions">
+          <a href="#contacto" class="ig-btn solid">Contactar</a>
+          <a href="#servicios" class="ig-btn soft">Servicios</a>
+          <a href="#portfolio" class="ig-btn soft">Ver feed</a>
+        </div>
+      </div>
+
+      <div class="ig-mini-grid">
+        <div class="ig-tile" data-lb-img="assets/valeria/valeria-work-1.jpg" data-lb-title="Solaia Botanicals · Packaging" data-lb-desc="Identidad completa, frascos serigrafiados y dirección fotográfica para marca de cosmética botánica en Mallorca.">
+          <img src="assets/valeria/valeria-work-1.jpg" alt="Proyecto Solaia Botanicals">
+        </div>
+        <div class="ig-tile" data-lb-img="assets/valeria/valeria-work-2.jpg" data-lb-title="Monografía Calma · Editorial" data-lb-desc="Diseño editorial, sistema tipográfico y producción impresa para estudio de arquitectura interior.">
+          <img src="assets/valeria/valeria-work-2.jpg" alt="Proyecto Monografía Calma">
+        </div>
+        <div class="ig-tile" data-lb-img="assets/valeria/valeria-work-3.jpg" data-lb-title="Café Brisa · Identidad &amp; Packaging" data-lb-desc="Rebranding completo de tostador de café de especialidad en el Eixample: bolsas, cerámica y señalética.">
+          <img src="assets/valeria/valeria-work-3.jpg" alt="Proyecto Café Brisa">
+        </div>
+        <div class="ig-tile" data-lb-img="assets/valeria/valeria-work-4.jpg" data-lb-title="Sistema de materiales · Casa Nómada" data-lb-desc="Paleta táctil de linos, piedra natural y dirección de arte para marca hotelera boutique.">
+          <img src="assets/valeria/valeria-work-4.jpg" alt="Moodboard Casa Nómada">
+        </div>
+        <div class="ig-tile" data-lb-img="assets/valeria/valeria-portrait.jpg" data-lb-title="Detrás del estudio · Poblenou" data-lb-desc="Sesión editorial en nuestro estudio de Barcelona preparando lanzamientos de otoño.">
+          <img src="assets/valeria/valeria-portrait.jpg" alt="Estudio Valeria Méndez">
+        </div>
+        <div class="ig-tile" data-lb-img="assets/valeria/valeria-work-5.jpg" data-lb-title="Papelería &amp; Cerámica · Taller Sol" data-lb-desc="Sistema táctil de tarjetas letterpress en algodón 600g y dirección de arte sobre piedra travertino.">
+          <img src="assets/valeria/valeria-work-5.jpg" alt="Papelería editorial Taller Sol">
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="sobre-mi">
+  <div class="wrap about-grid">
+    <div class="portrait-frame reveal">
+      <img src="assets/valeria/valeria-portrait.jpg" alt="Valeria Méndez en su estudio de Barcelona" loading="lazy">
+      <div class="portrait-tag">
+        <b>Estudio en Poblenou</b>
+        <span>Barcelona · Clientes en 6 países</span>
+      </div>
+    </div>
+    <div class="about-copy reveal d1">
+      <span class="eyebrow">Sobre mí</span>
+      <h2 style="margin:14px 0 20px">Nueve años traduciendo ideas en <em>marcas memorables</em>.</h2>
+      <p>Empecé compartiendo mis procesos de diseño en Instagram en 2021 sin imaginar que esa comunidad se convertiría en mi principal canal de clientes. Hoy dirijo proyectos de identidad visual para fundadoras que quieren <strong>dejar de competir por precio</strong>.</p>
+      <p>No entrego un logotipo suelto en un PDF. Construyo sistemas completos que funcionan igual de bien en un frasco de vidrio, en un carrusel de Instagram y en tu tienda online.</p>
+      <div class="pills">
+        <span class="pill">Estrategia de Marca</span>
+        <span class="pill">Identidad Visual</span>
+        <span class="pill">Packaging Editorial</span>
+        <span class="pill">Dirección de Arte</span>
+        <span class="pill">Diseño Web</span>
+        <span class="pill">Mentoría 1:1</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Servicios</span>
+      <h2>Tres formas de trabajar <em>conmigo</em>.</h2>
+      <p class="lead">Tarifas transparentes y plazas limitadas cada trimestre para involucrarme personalmente en cada dirección creativa.</p>
+    </div>
+    <div class="srv-grid">
+      <article class="srv-card reveal">
+        <div>
+          <span class="srv-tag">Diagnóstico · 2 semanas</span>
+          <h3>Auditoría &amp; Redirección Visual</h3>
+          <p>Para marcas que ya venden pero sienten que su imagen se ha quedado pequeña frente a la calidad de su producto.</p>
+          <ul class="srv-list">
+            <li>Revisión completa de web, IG y packaging</li>
+            <li>Nueva dirección estética y moodboard</li>
+            <li>Sesión estratégica de 90 minutos</li>
+          </ul>
+        </div>
+        <div class="srv-foot">
+          <div class="srv-price">650 € <small>/ único</small></div>
+          <a href="#contacto" class="ig-btn soft">Solicitar</a>
+        </div>
+      </article>
+
+      <article class="srv-card featured reveal d1">
+        <div>
+          <span class="srv-tag">Más solicitado · 6 semanas</span>
+          <h3>Identidad de Marca Integral</h3>
+          <p>El proyecto estrella del estudio: construimos de cero todo tu universo visual listo para lanzar y escalar.</p>
+          <ul class="srv-list">
+            <li>Estrategia y posicionamiento de marca</li>
+            <li>Sistema visual, tipografía y paleta</li>
+            <li>Packaging + plantillas editoriales para IG</li>
+            <li>Manual de marca y dirección fotográfica</li>
+          </ul>
+        </div>
+        <div class="srv-foot">
+          <div class="srv-price">3.800 € <small>/ desde</small></div>
+          <a href="#contacto" class="btn btn-primary" style="background:#f3c68f;color:#171513;padding:9px 18px;font-size:.76rem">Reservar plaza</a>
+        </div>
+      </article>
+
+      <article class="srv-card reveal d2">
+        <div>
+          <span class="srv-tag">Formación · 4 sesiones</span>
+          <h3>Mentoría 1:1 para Diseñadores</h3>
+          <p>Te acompaño a ordenar tu portfolio, atraer clientes internacionales desde Instagram y presupuestar con seguridad.</p>
+          <ul class="srv-list">
+            <li>Revisión de portfolio y precios</li>
+            <li>Estrategia de contenido en Instagram</li>
+            <li>Soporte por WhatsApp durante 30 días</li>
+          </ul>
+        </div>
+        <div class="srv-foot">
+          <div class="srv-price">980 € <small>/ programa</small></div>
+          <a href="#contacto" class="ig-btn soft">Aplicar</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO / IG FEED -->
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="port-top">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Portfolio &amp; Feed</span>
+        <h2>Proyectos recientes del <em>estudio</em>.</h2>
+        <p class="lead">Haz clic en cualquier pieza para ver el alcance del proyecto y la historia detrás del proceso.</p>
+      </div>
+      <div class="filters reveal d1">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="packaging">Packaging</button>
+        <button class="filter-btn" data-filter="branding">Branding</button>
+        <button class="filter-btn" data-filter="editorial">Editorial</button>
+      </div>
+    </div>
+
+    <div class="port-grid">
+      <article class="work-card reveal" data-cat="packaging" data-lb-img="assets/valeria/valeria-work-1.jpg" data-lb-title="Solaia Botanicals · Mallorca" data-lb-desc="Rediseño integral de identidad y línea de 6 envases en vidrio esmerilado. Incremento del ticket medio en un 38 % tras el relanzamiento.">
+        <div class="work-img"><img src="assets/valeria/valeria-work-1.jpg" alt="Solaia Botanicals packaging" loading="lazy"></div>
+        <div class="work-meta">
+          <span>Packaging · Cosmética</span>
+          <h3>Solaia Botanicals</h3>
+          <p>Identidad, envases y dirección fotográfica</p>
+        </div>
+      </article>
+      <article class="work-card reveal d1" data-cat="editorial" data-lb-img="assets/valeria/valeria-work-2.jpg" data-lb-title="Monografía Calma · Arquitectura" data-lb-desc="Libro de marca en edición limitada de 500 ejemplares y catálogo web para estudio de interiorismo mediterráneo.">
+        <div class="work-img"><img src="assets/valeria/valeria-work-2.jpg" alt="Monografía Calma diseño editorial" loading="lazy"></div>
+        <div class="work-meta">
+          <span>Editorial · Arquitectura</span>
+          <h3>Monografía Calma</h3>
+          <p>Sistema tipográfico y publicación impresa</p>
+        </div>
+      </article>
+      <article class="work-card reveal d2" data-cat="branding" data-lb-img="assets/valeria/valeria-work-3.jpg" data-lb-title="Café Brisa · Barcelona" data-lb-desc="Identidad visual, bolsas compostables, cerámica personalizada y señalética para tostador de especialidad.">
+        <div class="work-img"><img src="assets/valeria/valeria-work-3.jpg" alt="Café Brisa branding" loading="lazy"></div>
+        <div class="work-meta">
+          <span>Branding · Hospitalidad</span>
+          <h3>Café Brisa</h3>
+          <p>Universo de marca y experiencia en local</p>
+        </div>
+      </article>
+      <article class="work-card reveal d3" data-cat="branding" data-lb-img="assets/valeria/valeria-work-4.jpg" data-lb-title="Casa Nómada · Hoteles Boutique" data-lb-desc="Sistema de materiales, papelería de habitación y guía visual para tres hoteles boutique en Menorca y Empordà.">
+        <div class="work-img"><img src="assets/valeria/valeria-work-4.jpg" alt="Casa Nómada dirección de arte" loading="lazy"></div>
+        <div class="work-meta">
+          <span>Branding · Hotelería</span>
+          <h3>Casa Nómada</h3>
+          <p>Dirección de arte y papelería táctil</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT METRICS -->
+<section class="metrics-band">
+  <div class="wrap metrics-grid">
+    <div class="metric reveal">
+      <div class="n"><span data-count="142">0</span>K+</div>
+      <div class="t">Comunidad sumando Instagram, YouTube, LinkedIn y Newsletter</div>
+    </div>
+    <div class="metric reveal d1">
+      <div class="n"><span data-count="48">0</span></div>
+      <div class="t">Marcas independientes lanzadas o rediseñadas desde 2018</div>
+    </div>
+    <div class="metric reveal d2">
+      <div class="n"><span data-count="9">0</span></div>
+      <div class="t">Años dirigiendo identidad visual y dirección de arte</div>
+    </div>
+    <div class="metric reveal d3">
+      <div class="n"><span data-count="6">0</span></div>
+      <div class="t">Países con clientes activos entre Europa y Latinoamérica</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Testimonios</span>
+      <h2>Resultados reales en <em>marcas y diseñadores</em>.</h2>
+    </div>
+    <div class="testi-grid">
+      <article class="testi reveal">
+        <span class="testi-res">+38 % en ticket medio</span>
+        <p>«Pasamos de explicar por qué nuestra cosmética costaba 65 € a agotar el primer lote en tres semanas. Valeria entendió el alma del proyecto desde la primera llamada.»</p>
+        <div class="who"><b>Nuria F.</b><span>Fundadora de Solaia Botanicals</span></div>
+      </article>
+      <article class="testi reveal d1">
+        <span class="testi-res">3 clientes cerrados en 45 días</span>
+        <p>«En la mentoría rehicimos mi portfolio y mi propuesta de tarifas. En mes y medio cerré tres proyectos por encima de 2.400 € directamente desde mensajes de Instagram.»</p>
+        <div class="who"><b>Diego S.</b><span>Diseñador de marca · Madrid</span></div>
+      </article>
+      <article class="testi reveal d2">
+        <span class="testi-res">Marca coherente en 4 canales</span>
+        <p>«Por fin nuestras bolsas de café, la web y las fotos del feed hablan el mismo idioma. La gente nos saca fotos en la barra todos los días sin que se lo pidamos.»</p>
+        <div class="who"><b>Marc &amp; Laura T.</b><span>Socios de Café Brisa</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Contacto</span>
+      <h2 style="margin:14px 0 18px">Cuéntame qué marca estás <em>construyendo</em>.</h2>
+      <p class="lead">Respondo personalmente en menos de 48 horas laborables con propuesta de disponibilidad y próximos pasos.</p>
+      <div class="social-links">
+        <a href="#top" class="soc-card"><b>Instagram</b><span>@valeriamendez.design · 84,2K</span></a>
+        <a href="#top" class="soc-card"><b>YouTube</b><span>Procesos de marca · 31,5K</span></a>
+        <a href="#top" class="soc-card"><b>LinkedIn</b><span>/in/valeriamendez · 18,4K</span></a>
+        <a href="mailto:hola@valeriamendez.design" class="soc-card"><b>Email directo</b><span>hola@valeriamendez.design</span></a>
+      </div>
+    </div>
+
+    <form class="contact-form reveal d1" id="contactForm">
+      <div class="field"><label for="c-name">Tu nombre</label><input id="c-name" name="name" required placeholder="Nombre y apellidos"></div>
+      <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" required placeholder="tu@marca.com"></div>
+      <div class="field"><label for="c-service">¿En qué puedo ayudarte?</label>
+        <select id="c-service" name="service">
+          <option>Identidad de Marca Integral (desde 3.800 €)</option>
+          <option>Auditoría &amp; Redirección Visual (650 €)</option>
+          <option>Mentoría 1:1 para Diseñadores (980 €)</option>
+          <option>Colaboración / Charla / Prensa</option>
+        </select>
+      </div>
+      <div class="field"><label for="c-msg">Cuéntame sobre tu proyecto y fechas</label><textarea id="c-msg" name="message" required placeholder="Tu @ de Instagram o web actual, objetivo y fecha estimada de lanzamiento..."></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%">Enviar consulta</button>
+      <div class="feedback" id="contactFeedback" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <strong style="font-family:var(--serif);font-size:1.5rem;font-weight:400;color:#fff">Valeria Méndez · @valeriamendez.design</strong>
+      <a href="#top" class="btn btn-outline" style="border-color:rgba(248,245,239,.26);color:#f8f5ef;padding:9px 18px;font-size:.76rem">Volver arriba ↑</a>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Valeria Méndez · Perfil ficticio de demostración</span>
+      <span>Generado con la skill <code>kit-instagram-web</code> · Claude Skill Factory ES</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Detalle del proyecto">
+  <div class="lb-box">
+    <img id="lbImg" src="" alt="">
+    <div class="lb-info">
+      <button class="lb-close" id="lbClose" aria-label="Cerrar">✕</button>
+      <div>
+        <span class="eyebrow" style="margin-bottom:10px">Proyecto destacado</span>
+        <h3 id="lbTitle" style="font-size:2rem;margin-bottom:12px"></h3>
+        <p id="lbDesc" style="font-size:.9rem;color:var(--muted);line-height:1.7"></p>
+      </div>
+      <a href="#contacto" class="btn btn-primary" id="lbCta" style="width:100%">Quiero algo así para mi marca</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const nav = document.getElementById('nav');
+  const onScrollNav = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScrollNav();
+
+  /* Mobile nav */
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  /* Portfolio filters */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const workCards = document.querySelectorAll('.work-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filter;
+      workCards.forEach(c => c.classList.toggle('hidden', cat !== 'all' && c.dataset.cat !== cat));
+    });
+  });
+
+  /* Lightbox */
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbTitle = document.getElementById('lbTitle');
+  const lbDesc = document.getElementById('lbDesc');
+  const closeLb = () => lb.classList.remove('open');
+  document.querySelectorAll('[data-lb-img]').forEach(el => {
+    el.addEventListener('click', () => {
+      lbImg.src = el.dataset.lbImg;
+      lbImg.alt = el.dataset.lbTitle || '';
+      lbTitle.textContent = el.dataset.lbTitle || '';
+      lbDesc.textContent = el.dataset.lbDesc || '';
+      lb.classList.add('open');
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbCta').addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  /* Form feedback */
+  const form = document.getElementById('contactForm');
+  const fb = document.getElementById('contactFeedback');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    fb.textContent = `¡Recibido, ${form.name.value.trim()}! Te responderé a ${form.email.value.trim()} en menos de 48 h con huecos disponibles.`;
+    fb.classList.add('show');
+    form.reset();
+  });
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    document.querySelectorAll('[data-count]').forEach(el => el.textContent = el.dataset.count);
+    window.addEventListener('scroll', onScrollNav, { passive: true });
+    return;
+  }
+
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const dur = 1350;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const countIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animateCount(e.target); countIO.unobserve(e.target); }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+
+  const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
+  let ticking = false;
+  const update = () => {
+    const y = window.scrollY;
+    onScrollNav();
+    parallaxEls.forEach(el => {
+      el.style.transform = `translate3d(0, ${y * parseFloat(el.dataset.parallax)}px, 0)`;
+    });
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

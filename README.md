@@ -108,26 +108,42 @@ Generation is solved today. Execution and evaluation are the next milestone: a s
 
 ## Examples: what the kits actually produce
 
-Two complete, fictional deliverables are included so reviewers can inspect output quality without running anything. The company — *Clínica Dental Sonrisa Norte*, a dental clinic in Valencia — is invented; all data is synthetic.
+Four complete, fictional deliverables are included so reviewers can inspect output quality across three distinct visual directions without installing anything. Every brand, figure, price and review is synthetic.
 
-### Business audit report — `kit-auditoria-negocio`
+### 1. Luxury restaurant landing page — `kit-web-scrolling` (dark editorial theme)
+
+[![KURO Omakase & Robata preview](./assets/preview-kuro-omakase.png)](./examples/web-kuro-omakase.html)
+
+*KURO · Omakase & Robata* (Madrid): warm obsidian & brushed gold palette, scroll progress bar, full-bleed hero with parallax, animated counters, interactive tabbed menu (*Omakase*, *Robata & Nigiri*, *Sake & Bodega*), bento photography gallery and live reservation form.
+
+- [Open the HTML file](./examples/web-kuro-omakase.html) · [live version](https://anas12bs-arch.github.io/claude-skill-factory-es/examples/web-kuro-omakase.html)
+
+### 2. Personal brand site from Instagram — `kit-instagram-web`
+
+[![Valeria Méndez Instagram-to-Web preview](./assets/preview-valeria-instagram.png)](./examples/web-valeria-mendez-ig.html)
+
+*Valeria Méndez · `@valeriamendez.design`* (Barcelona): elevated interactive Instagram profile card with rotating story ring, verified badge, instant visible stats and 6-tile portfolio mini-grid, paired with multi-platform community proof, filterable portfolio with lightbox modal and service tiers.
+
+- [Open the HTML file](./examples/web-valeria-mendez-ig.html) · [live version](https://anas12bs-arch.github.io/claude-skill-factory-es/examples/web-valeria-mendez-ig.html)
+
+### 3. Clinical landing page — `kit-web-scrolling` (light architectural theme)
+
+[![Landing page preview](./assets/preview-landing-hero.png)](./examples/web-clinica-sonrisa-norte.html)
+
+*Clínica Dental Sonrisa Norte* (Valencia): light clinical palette matching the skill's healthcare ruleset, sticky blurred navigation, arched architectural hero frame, animated counters, six treatment cards with transparent pricing and an appointment request form.
+
+- [Open the HTML file](./examples/web-clinica-sonrisa-norte.html) · [live version](https://anas12bs-arch.github.io/claude-skill-factory-es/examples/web-clinica-sonrisa-norte.html)
+
+### 4. Business audit report — `kit-auditoria-negocio`
 
 [![Audit report preview](./assets/preview-audit-report.png)](./examples/auditoria-negocio-clinica-sonrisa-norte.html)
 
-A 58/100 audit across twelve areas, seven documented inconsistencies with concrete fixes, a customer-journey map showing where patients are lost, copy rewrites, a prioritised action plan and five quick wins.
+A 58/100 audit for *Clínica Dental Sonrisa Norte* across twelve areas, seven documented inconsistencies with concrete fixes, a customer-journey map showing where patients are lost, copy rewrites, a prioritised action plan and five quick wins.
 
 - [Open the HTML report](./examples/auditoria-negocio-clinica-sonrisa-norte.html) · [live version](https://anas12bs-arch.github.io/claude-skill-factory-es/examples/auditoria-negocio-clinica-sonrisa-norte.html)
 - [Open the PDF export](./examples/auditoria-negocio-clinica-sonrisa-norte.pdf)
 
-### Landing page — `kit-web-scrolling`
-
-[![Landing page preview](./assets/preview-landing-hero.png)](./examples/web-clinica-sonrisa-norte.html)
-
-A single-file landing page in a light clinical palette: sticky blurred navigation, scroll reveals with staggered timing, animated counters, parallax blobs, service cards with real price formatting and a contact form.
-
-- [Open the landing page](./examples/web-clinica-sonrisa-norte.html) · [live version](https://anas12bs-arch.github.io/claude-skill-factory-es/examples/web-clinica-sonrisa-norte.html)
-
-Both files are self-contained. No server, no dependencies, no build.
+Browse all demos together on the [live examples gallery](https://anas12bs-arch.github.io/claude-skill-factory-es/examples/). All deliverables run directly from disk with zero bundler, framework or backend.
 
 ---
 
@@ -179,7 +195,7 @@ Tested with Claude Code on macOS, Linux and Windows. No `package.json`, no virtu
 ```
 claude-skill-factory-es/
 ├── kits/                  # the ten skill kits (Spanish content, untouched)
-├── examples/              # two complete fictional deliverables + PDF
+├── examples/              # four complete fictional deliverables + PDF + editorial assets
 ├── assets/                # banner and preview images
 ├── LICENSE                # MIT, 2026
 ├── README.md              # this file
